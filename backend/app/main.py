@@ -396,13 +396,16 @@ if _stat_os.path.isdir(_STATIC_DIR):
     # 挂载静态资源（JS/CSS/图片等）
     app.mount("/assets", _StaticFiles(directory=_stat_os.path.join(_STATIC_DIR, "assets")), name="assets")
 
-    # SPA 回退：所有非 /api/ 非 /docs 的 GET 请求返回 index.html
-    from fastapi import Request as _Request
+    # SPA 回退：非 /api/ 非 /docs 的 GET 请求返回 index.html
+    from fastapi import Request as _Request, HTTPException as _HTTPException
     @app.get("/{full_path:path}")
     async def _serve_spa(full_path: str, request: _Request):
         """前端 SPA 路由回退：非 API 请求返回 index.html"""
+        # 不拦截 API 和文档路由
+        if full_path.startswith("api/") or full_path.startswith("docs") or full_path.startswith("openapi"):
+            raise _HTTPException(status_code=404, detail="Not Found")
         file_path = _stat_os.path.join(_STATIC_DIR, full_path)
-        if _stat_os.path.isfile(file_path) and not full_path.startswith("api/"):
+        if _stat_os.path.isfile(file_path):
             return _FileResponse(file_path)
         return _FileResponse(_stat_os.path.join(_STATIC_DIR, "index.html"))
 
