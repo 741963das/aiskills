@@ -383,6 +383,31 @@ app.include_router(reflection_router, prefix="/api")
 app.include_router(analytics_router, prefix="/api")
 app.include_router(admin_router, prefix="/api")
 
+# ---------------------------------------------------------------------------
+# 生产模式：托管前端静态文件（Docker 容器中启用）
+# 当 static/ 目录存在时，自动挂载前端 SPA 并提供路由回退
+# ---------------------------------------------------------------------------
+import os as _stat_os
+from fastapi.staticfiles import StaticFiles as _StaticFiles
+from starlette.responses import FileResponse as _FileResponse
+
+_STATIC_DIR = _stat_os.path.join(_stat_os.path.dirname(_stat_os.path.abspath(__file__)), "..", "static")
+if _stat_os.path.isdir(_STATIC_DIR):
+    # 挂载静态资源（JS/CSS/图片等）
+    app.mount("/assets", _StaticFiles(directory=_stat_os.path.join(_STATIC_DIR, "assets")), name="assets")
+
+    # SPA 回退：所有非 /api/ 非 /docs 的 GET 请求返回 index.html
+    from fastapi import Request as _Request
+    @app.get("/{full_path:path}")
+    async def _serve_spa(full_path: str, request: _Request):
+        """前端 SPA 路由回退：非 API 请求返回 index.html"""
+        file_path = _stat_os.path.join(_STATIC_DIR, full_path)
+        if _stat_os.path.isfile(file_path) and not full_path.startswith("api/"):
+            return _FileResponse(file_path)
+        return _FileResponse(_stat_os.path.join(_STATIC_DIR, "index.html"))
+
+    logger.info("前端静态文件服务已启用（目录: %s）", _STATIC_DIR)
+
 
 # ---------------------------------------------------------------------------
 # 启动生命周期钩子：1) 可选一次性清理测试数据  2) 幂等播种内建内容

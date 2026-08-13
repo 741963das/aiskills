@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+*.egg-info/
+
+# Node
+node_modules/
+frontend/node_modules/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Database & Data
+*.db
+chroma_data/
+uploads/
+outputs/
+
+# IDE
+.vscode/
+.idea/
+
+# Git
+.git/
+.gitignore
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+frontend/dist/
+dist/
+
+# Docs
+*.md
+!requirements.txt

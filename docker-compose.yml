@@ -1,0 +1,32 @@
+# ============================================================
+# Docker Compose（本地测试用）
+# 启动: docker-compose up --build
+# 访问: http://localhost:8008
+# ============================================================
+
+version: '3.8'
+
+services:
+  aiskills:
+    build: .
+    container_name: aiskills
+    ports:
+      - "8008:8008"
+    environment:
+      - SECRET_KEY=dev-secret-key-change-in-production
+      - SILICONFLOW_API_KEY=${SILICONFLOW_API_KEY:-sk-your-key}
+      - DATABASE_URL=sqlite:///./app.db
+      - CORS_ORIGINS=http://localhost:8008,http://localhost:5173
+      - UPLOAD_DIR=/app/uploads
+      - OUTPUT_DIR=/app/outputs
+      - CHROMA_PERSIST_DIR=/app/chroma_data
+      - SILICONFLOW_BASE_URL=https://api.siliconflow.cn/v1
+      - EMBEDDING_MODEL=BAAI/bge-m3
+      - CHAT_MODEL=deepseek-ai/DeepSeek-V3.2
+      - CLEANUP_TEST_DATA_ON_START=false
+    volumes:
+      - ./backend/uploads:/app/uploads
+      - ./backend/outputs:/app/outputs
+      - ./backend/chroma_data:/app/chroma_data
+      - ./backend/app.db:/app/app.db
+    restart: unless-stopped

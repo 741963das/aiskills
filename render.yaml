@@ -1,0 +1,58 @@
+# ============================================================
+# Render 部署配置
+# 推送到 GitHub 后，Render 会自动识别此文件并创建服务
+# ============================================================
+
+services:
+  - type: web
+    name: aiskills
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /api/health
+
+    envVars:
+      # ---- 安全密钥（Render 自动生成） ----
+      - key: SECRET_KEY
+        generateValue: true
+
+      # ---- AI 大模型 API（必填！部署后手动填入） ----
+      - key: SILICONFLOW_API_KEY
+        sync: false
+        value: sk-your-siliconflow-api-key
+
+      # ---- 数据库 ----
+      - key: DATABASE_URL
+        value: sqlite:///./app.db
+
+      # ---- CORS 跨域 ----
+      - key: CORS_ORIGINS
+        value: https://aiskills.onrender.com
+
+      # ---- 文件存储路径 ----
+      - key: UPLOAD_DIR
+        value: /app/uploads
+      - key: OUTPUT_DIR
+        value: /app/outputs
+
+      # ---- Chroma 向量数据库 ----
+      - key: CHROMA_PERSIST_DIR
+        value: /app/chroma_data
+
+      # ---- SiliconFlow 配置 ----
+      - key: SILICONFLOW_BASE_URL
+        value: https://api.siliconflow.cn/v1
+      - key: EMBEDDING_MODEL
+        value: BAAI/bge-m3
+      - key: CHAT_MODEL
+        value: deepseek-ai/DeepSeek-V3.2
+
+      # ---- 生产环境不清理测试数据 ----
+      - key: CLEANUP_TEST_DATA_ON_START
+        value: "false"
+
+    # 持久化磁盘（1GB 免费，用于数据库和向量库）
+    disk:
+      name: data
+      mountPath: /app/data
+      sizeGB: 1
