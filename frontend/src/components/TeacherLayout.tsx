@@ -1,4 +1,4 @@
-import { Sparkles, LayoutDashboard, BookOpen, Database, BarChart3, PlusCircle, Upload, LogOut, Bell, Settings, User, Store, Files, Lightbulb, ClipboardList } from 'lucide-react';
+import { Sparkles, LayoutDashboard, BookOpen, Database, BarChart3, PlusCircle, Upload, LogOut, Bell, Settings, User, Store, Files, Lightbulb, ClipboardList, MessageSquare } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -9,6 +9,7 @@ interface LayoutProps {
 const navItems = [
   { id: 'dashboard', label: '工作台', icon: LayoutDashboard, path: '/teacher/dashboard' },
   { id: 'my-agents', label: '我的助手', icon: BookOpen, path: '/teacher/my-agents' },
+  { id: 'questions', label: '学生疑问', icon: MessageSquare, path: '/teacher/questions' },
   { id: 'lesson-planner', label: 'AI 备课助手', icon: ClipboardList, path: '/teacher/lesson-planner' },
   { id: 'reflection', label: '教学反思', icon: Lightbulb, path: '/teacher/reflection' },
   { id: 'analytics', label: '学情分析', icon: BarChart3, path: '/teacher/analytics' },

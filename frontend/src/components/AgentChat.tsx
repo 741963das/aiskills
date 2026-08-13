@@ -26,6 +26,7 @@ interface Props {
   draftKey?: string;
   initialDraft?: string;
   onDraftSave?: () => void;
+  onMessageComplete?: () => void;
 }
 
 export function AgentChat({
@@ -40,6 +41,7 @@ export function AgentChat({
   draftKey,
   initialDraft,
   onDraftSave,
+  onMessageComplete,
 }: Props) {
   const isTeacherScope = publishScope === 'teachers';
   const headerLabel = isTeacherScope ? '教师助手对话界面' : '模拟学生对话界面';
@@ -243,6 +245,7 @@ export function AgentChat({
     );
 
     setIsSending(false);
+    onMessageComplete?.();
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

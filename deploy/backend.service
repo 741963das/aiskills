@@ -1,0 +1,26 @@
+# ============================================================
+# AI Skills Platform - systemd 服务单元（Linux 生产环境）
+# 部署路径：/etc/systemd/system/aiskills-backend.service
+# 使用：uvicorn 生产模式（多线程单进程，SSE 兼容）
+# ============================================================
+[Unit]
+Description=AI Skills Platform Backend (FastAPI + Uvicorn)
+After=network.target
+
+[Service]
+Type=simple
+# 请按实际路径修改 User / WorkingDirectory / ExecStart
+User=aiskills
+Group=aiskills
+WorkingDirectory=/var/www/aiskills/backend
+EnvironmentFile=/var/www/aiskills/backend/.env
+ExecStart=/var/www/aiskills/backend/venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8008 --workers 1
+Restart=always
+RestartSec=3
+
+# 日志
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

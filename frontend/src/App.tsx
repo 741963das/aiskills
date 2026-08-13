@@ -13,6 +13,7 @@ import { Documents } from './pages/Documents';
 import { LessonPlanner } from './pages/LessonPlanner';
 import { TeachingReflectionPage } from './pages/TeachingReflection';
 import { ClassAnalyticsPage } from './pages/ClassAnalytics';
+import { TeacherQuestions } from './pages/TeacherQuestions';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { StudentDashboard } from './pages/student/StudentDashboard';
 import { StudentCourses } from './pages/student/StudentCourses';
@@ -121,6 +122,14 @@ function App() {
             element={
               <ProtectedRoute role="teacher">
                 <ClassAnalyticsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/teacher/questions"
+            element={
+              <ProtectedRoute role="teacher">
+                <TeacherQuestions />
               </ProtectedRoute>
             }
           />

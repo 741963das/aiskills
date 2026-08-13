@@ -271,8 +271,9 @@ def download_agent(db: Session, src_agent_id: int, current_user_id: int) -> Agen
     db.commit()
     db.refresh(new_agent)
 
-    # 复制知识库文件记录
+    # 复制知识库文件记录（记录新旧 file_id 映射，用于重写向量 metadata）
     src_files = db.query(KnowledgeFile).filter(KnowledgeFile.agent_id == src_agent_id).all()
+    file_id_map: dict[int, int] = {}
     for f in src_files:
         new_file = KnowledgeFile(
             user_id=current_user_id,
@@ -285,12 +286,14 @@ def download_agent(db: Session, src_agent_id: int, current_user_id: int) -> Agen
             chunk_count=f.chunk_count,
         )
         db.add(new_file)
+        db.flush()  # 获取新 file 的 id
+        file_id_map[f.id] = new_file.id
     db.commit()
 
-    # 复制 Chroma 向量数据（失败不阻断）
+    # 复制 Chroma 向量数据（失败不阻断）；重写 file_id 映射以修复检索
     try:
         from .rag import copy_chroma_collection
-        copy_chroma_collection(src_agent.id, new_agent.id)
+        copy_chroma_collection(src_agent.id, new_agent.id, file_id_map=file_id_map)
     except Exception as e:
         logger.warning(f"复制向量数据失败: {e}")
 

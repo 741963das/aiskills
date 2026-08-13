@@ -21,6 +21,7 @@ from ..models.student import (
     LearningRecord,
     MistakeRecord,
     StudentProfile,
+    QuestionRecord,
 )
 
 router = APIRouter(prefix="/student", tags=["student"])
@@ -854,3 +855,36 @@ def get_recommendations(
             )
         )
     return items
+
+
+# ---------------------------------------------------------------------------
+# 13. 学生疑问记录（待答疑池状态）
+# ---------------------------------------------------------------------------
+
+@router.get("/questions")
+def list_my_questions(
+    agent_id: int = Query(..., description="助手ID"),
+    status: Optional[str] = Query(None, description="open / answered"),
+    current_user: User = Depends(require_role("student")),
+    db: Session = Depends(get_db),
+):
+    """学生端：查看自己在某个助手下的疑问记录及状态。"""
+    query = db.query(QuestionRecord).filter(
+        QuestionRecord.student_id == current_user.id,
+        QuestionRecord.agent_id == agent_id,
+    )
+    if status:
+        query = query.filter(QuestionRecord.status == status)
+    records = query.order_by(QuestionRecord.created_at.desc()).all()
+    items = []
+    for r in records:
+        items.append({
+            "id": r.id,
+            "question": r.question,
+            "pain_point": r.pain_point,
+            "status": r.status,
+            "teacher_reply": r.teacher_reply,
+            "answered_at": r.answered_at.isoformat() if r.answered_at else None,
+            "created_at": r.created_at.isoformat() if r.created_at else None,
+        })
+    return {"items": items, "total": len(items)}

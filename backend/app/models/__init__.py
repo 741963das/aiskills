@@ -6,6 +6,12 @@ from .knowledge import KnowledgeFile, KnowledgeChunk
 from .conversation import Conversation
 from .message import Message
 from .document import GeneratedDocument
-from .student import StudentAgent, LearningRecord, MistakeRecord, StudentProfile
+from .student import (
+    StudentAgent,
+    LearningRecord,
+    MistakeRecord,
+    StudentProfile,
+    QuestionRecord,
+)
 from .lesson_plan import LessonPlan
 from .reflection import TeachingReflection

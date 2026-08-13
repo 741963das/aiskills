@@ -14,7 +14,7 @@ from ..models.user import User
 from ..models.agent import Agent
 from ..models.conversation import Conversation
 from ..models.message import Message
-from ..models.student import LearningRecord, MistakeRecord, StudentAgent
+from ..models.student import LearningRecord, MistakeRecord, StudentAgent, QuestionRecord
 from ..utils.auth import get_current_user
 from ..services.rag import (
     retrieve_for_rag,
@@ -276,6 +276,121 @@ def _detect_and_record_mistakes(
     logger.info(f"学生 {student_id} 检测到 {len(result.get('mistakes', []))} 个错题")
 
 
+def _detect_and_record_question(
+    db: Session,
+    student_id: int,
+    agent_id: int,
+    conversation_id: int,
+    user_message: str,
+    assistant_answer: str,
+    agent_config: dict,
+):
+    """检测学生提问是否为"疑问/困惑"，若是则写入 QuestionRecord（待答疑池）。
+
+    这是经验沉淀的触发源：学生真实提问暴露痛点 → 写入待答疑池 → 教师解答 → 沉淀经验。
+    仅当提问达到一定长度且 LLM 判定为学习困惑时才入库，避免刷屏。
+    """
+    from openai import AsyncOpenAI
+    import httpx
+    import asyncio
+    from ..config import settings
+
+    # 过短的提问（闲聊/问候）不进入待答疑池
+    if len(user_message) < 12:
+        return
+
+    if not settings.SILICONFLOW_API_KEY or settings.SILICONFLOW_API_KEY.startswith("sk-your"):
+        return
+
+    subject = agent_config.get("subject", "") or agent_config.get("course_name", "")
+
+    prompt = f"""请分析以下学生与 AI 辅导的对话，判断学生的提问是否暴露了学习困惑或痛点（需要教师介入解答）。
+不判断对错，只判断是否"困惑/卡壳/经常出错/理解不了"。
+
+## 学生提问
+{user_message[:500]}
+
+## AI 回答
+{assistant_answer[:600]}
+
+## 输出要求
+输出 JSON 对象，格式如下：
+{{
+  "has_confusion": true/false,
+  "pain_point": "一句话概括学生的困惑/痛点；若无则空字符串"
+}}
+
+判断标准：
+- true：学生明确表达困惑（如"搞不清、分不清、总出错、老是漏、不会做、理解不了、经常丢分"等）
+- false：学生只是常规提问、请求讲解、或表达感谢，没有明显困惑
+- 直接输出 JSON，不要添加任何解释。"""
+
+    client = AsyncOpenAI(
+        api_key=settings.SILICONFLOW_API_KEY,
+        base_url=settings.SILICONFLOW_BASE_URL,
+        timeout=httpx.Timeout(30.0, connect=10.0),
+    )
+
+    try:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        response = loop.run_until_complete(
+            client.chat.completions.create(
+                model=settings.CHAT_MODEL,
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.2,
+                max_tokens=256,
+            )
+        )
+        loop.close()
+    except Exception as e:
+        logger.warning(f"疑问检测 LLM 调用失败: {e}")
+        return
+
+    raw = (response.choices[0].message.content or "").strip()
+    try:
+        if "```json" in raw:
+            raw = raw.split("```json")[1].split("```")[0].strip()
+        elif "```" in raw:
+            raw = raw.split("```")[1].split("```")[0].strip()
+        result = json.loads(raw)
+    except (json.JSONDecodeError, IndexError):
+        logger.warning(f"疑问检测 JSON 解析失败: {raw[:200]}")
+        return
+
+    if not result.get("has_confusion"):
+        return
+
+    # 避免重复：同一学生同一 agent 已有未解答的同主题疑问则不重复入库
+    existing = (
+        db.query(QuestionRecord)
+        .filter(
+            QuestionRecord.student_id == student_id,
+            QuestionRecord.agent_id == agent_id,
+            QuestionRecord.status == "open",
+        )
+        .all()
+    )
+    pain_point = (result.get("pain_point") or "").strip()
+    for rec in existing:
+        if rec.question and pain_point and rec.question[:20] == user_message[:20]:
+            return
+
+    record = QuestionRecord(
+        student_id=student_id,
+        agent_id=agent_id,
+        conversation_id=conversation_id,
+        question=user_message,
+        ai_answer=assistant_answer,
+        pain_point=pain_point or None,
+        subject=subject or None,
+        status="open",
+    )
+    db.add(record)
+    db.commit()
+    logger.info(f"学生 {student_id} 疑问已进入待答疑池（agent={agent_id}）: {pain_point[:30]}")
+
+
 def _student_post_chat_tasks(
     student_id: int,
     agent_id: int,
@@ -284,7 +399,7 @@ def _student_post_chat_tasks(
     assistant_answer: str,
     agent_config: dict,
 ):
-    """学生端对话后后台任务：记录学习行为 + 错题检测（独立 DB session）。"""
+    """学生端对话后后台任务：记录学习行为 + 错题检测 + 疑问入库（独立 DB session）。"""
     db = SessionLocal()
     try:
         # 1. 写入学习记录
@@ -307,6 +422,17 @@ def _student_post_chat_tasks(
                 assistant_answer=assistant_answer,
                 agent_config=agent_config,
             )
+
+        # 3. 疑问检测 → 写入待答疑池（经验沉淀触发源）
+        _detect_and_record_question(
+            db=db,
+            student_id=student_id,
+            agent_id=agent_id,
+            conversation_id=conversation_id,
+            user_message=user_message,
+            assistant_answer=assistant_answer,
+            agent_config=agent_config,
+        )
     except Exception as e:
         logger.warning(f"学生端后台任务失败: {e}")
     finally:

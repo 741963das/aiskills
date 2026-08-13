@@ -19,6 +19,22 @@ export interface MarketplaceQuery {
   page_size?: number;
 }
 
+export interface AgentQuestion {
+  id: number;
+  agent_id: number;
+  student_id: number;
+  student_name?: string | null;
+  conversation_id?: number | null;
+  question: string;
+  ai_answer?: string | null;
+  teacher_reply?: string | null;
+  pain_point?: string | null;
+  subject?: string | null;
+  status: string;
+  created_at?: string | null;
+  answered_at?: string | null;
+}
+
 export const agentApi = {
   getAll: async (token: string, status?: string): Promise<Agent[]> => {
     const url = status ? `${API_BASE}/?status=${status}` : `${API_BASE}/`;
@@ -360,6 +376,60 @@ export const agentApi = {
     if (!response.ok) {
       const err = await response.json().catch(() => ({ detail: '删除条目失败' }));
       throw new Error(err.detail || '删除条目失败');
+    }
+    return response.json();
+  },
+
+  // ------- v4.1 师生问答沉淀：教师待答疑池 -------
+
+  getAgentQuestions: async (
+    token: string,
+    agentId: number,
+    status?: string,
+  ): Promise<{ items: AgentQuestion[]; total: number }> => {
+    const url = status
+      ? `${API_BASE}/${agentId}/questions?status=${status}`
+      : `${API_BASE}/${agentId}/questions`;
+    const response = await fetch(url, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({ detail: '获取学生疑问失败' }));
+      throw new Error(err.detail || '获取学生疑问失败');
+    }
+    return response.json();
+  },
+
+  answerAgentQuestion: async (
+    token: string,
+    agentId: number,
+    questionId: number,
+    reply: string,
+  ): Promise<{ message: string; question_id: number; status: string }> => {
+    const response = await fetch(`${API_BASE}/${agentId}/questions/${questionId}/answer`, {
+      method: 'POST',
+      headers: getAuthHeaders(token),
+      body: JSON.stringify({ reply }),
+    });
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({ detail: '提交解答失败' }));
+      throw new Error(err.detail || '提交解答失败');
+    }
+    return response.json();
+  },
+
+  // ------- 学生端：我的疑问记录状态 -------
+
+  getMyQuestions: async (
+    token: string,
+    agentId: number,
+  ): Promise<{ items: AgentQuestion[]; total: number }> => {
+    const response = await fetch(`/api/student/questions?agent_id=${agentId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({ detail: '获取疑问记录失败' }));
+      throw new Error(err.detail || '获取疑问记录失败');
     }
     return response.json();
   },

@@ -3,6 +3,7 @@ import re
 import json
 import hashlib
 import logging
+import threading
 from typing import List, Dict, Any, Optional, Generator
 
 from ..config import settings
@@ -38,13 +39,17 @@ def _get_client():
 # ---------------------------------------------------------------------------
 
 _chroma_client = None
+_chroma_lock = threading.Lock()
 
 
 def _get_chroma_client():
     global _chroma_client
     if _chroma_client is None:
-        import chromadb
-        _chroma_client = chromadb.PersistentClient(path=settings.CHROMA_PERSIST_DIR)
+        with _chroma_lock:
+            # 双重检查，避免并发上传时 repeated 初始化导致 tenant 竞争
+            if _chroma_client is None:
+                import chromadb
+                _chroma_client = chromadb.PersistentClient(path=settings.CHROMA_PERSIST_DIR)
     return _chroma_client
 
 
@@ -433,20 +438,41 @@ def _is_low_quality(text: str) -> bool:
 # Chroma collection copy (for Agent download)
 # ---------------------------------------------------------------------------
 
-def copy_chroma_collection(src_agent_id: int, dst_agent_id: int) -> int:
-    """复制源 agent 的 Chroma 向量数据到目标 agent。返回写入的 chunk 数量。"""
+def copy_chroma_collection(
+    src_agent_id: int,
+    dst_agent_id: int,
+    file_id_map: Dict[int, int] | None = None,
+) -> int:
+    """复制源 agent 的 Chroma 向量数据到目标 agent。返回写入的 chunk 数量。
+
+    file_id_map: 源 file_id → 目标 file_id 的映射。
+    下载助手时新建了 KnowledgeFile（新 file_id），必须把向量 metadata 中的
+    file_id 重写为目标 file_id，否则 retrieve_for_rag 用新 file_id 做 where
+    过滤时永远匹配不到，导致下载副本检索不到知识库内容。
+    """
     try:
         src_collection = _get_collection(src_agent_id)
         data = src_collection.get(include=["embeddings", "documents", "metadatas"])
         if not data["ids"]:
             return 0
 
+        # 重写 metadata 中的 file_id（若提供映射）
+        out_metadatas = data["metadatas"]
+        if file_id_map:
+            out_metadatas = []
+            for meta in data["metadatas"]:
+                meta = dict(meta or {})
+                old_fid = meta.get("file_id")
+                if old_fid is not None and old_fid in file_id_map:
+                    meta["file_id"] = file_id_map[old_fid]
+                out_metadatas.append(meta)
+
         dst_collection = _get_collection(dst_agent_id)
         dst_collection.add(
             ids=data["ids"],
             embeddings=data["embeddings"],
             documents=data["documents"],
-            metadatas=data["metadatas"],
+            metadatas=out_metadatas,
         )
         return len(data["ids"])
     except Exception as e:

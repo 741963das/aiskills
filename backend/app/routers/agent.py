@@ -1530,3 +1530,190 @@ def delete_five_layer_entry(
     _save_five_layer(db, agent, five_layer)
 
     return {"message": "已删除", "remaining_count": len(items)}
+
+
+# ---------------------------------------------------------------------------
+# 师生问答沉淀：教师端待答疑池（学生疑问 → 教师解答 → 沉淀经验）
+# ---------------------------------------------------------------------------
+
+class QuestionItem(BaseModel):
+    id: int
+    agent_id: int
+    student_id: int
+    student_name: Optional[str] = None
+    conversation_id: Optional[int] = None
+    question: str
+    ai_answer: Optional[str] = None
+    teacher_reply: Optional[str] = None
+    pain_point: Optional[str] = None
+    subject: Optional[str] = None
+    status: str
+    created_at: Optional[str] = None
+    answered_at: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+
+class AnswerQuestionRequest(BaseModel):
+    reply: str
+
+
+@router.get("/{agent_id}/questions")
+def list_agent_questions(
+    agent_id: int,
+    status: Optional[str] = Query(None, description="open / answered"),
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """v4.1 教师待答疑池：查看自己助手下学生发布的疑问（可分 status 筛选）。"""
+    agent = get_agent_by_id(db, agent_id=agent_id, user_id=current_user.id)
+    if agent is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Agent not found")
+
+    from ..models.student import QuestionRecord
+    from ..models.user import User as UserModel
+
+    query = db.query(QuestionRecord).filter(QuestionRecord.agent_id == agent_id)
+    if status:
+        query = query.filter(QuestionRecord.status == status)
+    records = query.order_by(QuestionRecord.created_at.desc()).limit(200).all()
+
+    student_ids = {r.student_id for r in records}
+    name_map = {}
+    if student_ids:
+        users = db.query(UserModel).filter(UserModel.id.in_(student_ids)).all()
+        name_map = {u.id: (u.display_name or u.username) for u in users}
+
+    items = []
+    for r in records:
+        items.append(QuestionItem(
+            id=r.id,
+            agent_id=r.agent_id,
+            student_id=r.student_id,
+            student_name=name_map.get(r.student_id),
+            conversation_id=r.conversation_id,
+            question=r.question,
+            ai_answer=r.ai_answer,
+            teacher_reply=r.teacher_reply,
+            pain_point=r.pain_point,
+            subject=r.subject,
+            status=r.status,
+            created_at=r.created_at.isoformat() if r.created_at else None,
+            answered_at=r.answered_at.isoformat() if r.answered_at else None,
+        ))
+    return {"items": items, "total": len(items)}
+
+
+@router.post("/{agent_id}/questions/{question_id}/answer")
+async def answer_question(
+    agent_id: int,
+    question_id: int,
+    request: AnswerQuestionRequest,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """v4.1 教师解答学生疑问：写入 teacher_reply → 触发经验沉淀（后台异步）。
+
+    这是师生问答沉淀的核心：教师对真实学生疑问给出针对性解答，
+    后台从「学生问题 + 教师解答」问答对中提取教学经验，注入到五层知识。
+    """
+    from datetime import datetime, timezone as _tz
+    from ..models.student import QuestionRecord
+
+    agent = get_agent_by_id(db, agent_id=agent_id, user_id=current_user.id)
+    if agent is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Agent not found")
+
+    record = (
+        db.query(QuestionRecord)
+        .filter(QuestionRecord.id == question_id, QuestionRecord.agent_id == agent_id)
+        .first()
+    )
+    if record is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="疑问不存在")
+
+    if not request.reply or not request.reply.strip():
+        raise HTTPException(status_code=400, detail="解答内容不能为空")
+
+    record.teacher_reply = request.reply.strip()
+    record.status = "answered"
+    record.answered_at = datetime.now(_tz.utc)
+    db.commit()
+
+    # 后台异步：从问答对提取经验并沉淀到五层知识
+    import threading
+    _agent_id = agent_id
+    _q = record.question
+    _reply = request.reply.strip()
+    thread = threading.Thread(
+        target=_qa_deposit_task,
+        args=(_agent_id, current_user.id, _q, _reply),
+        daemon=True,
+    )
+    thread.start()
+
+    return {
+        "message": "已提交解答，后台正在沉淀教学经验",
+        "question_id": question_id,
+        "status": "answered",
+    }
+
+
+def _qa_deposit_task(agent_id: int, teacher_id: int, student_question: str, teacher_reply: str):
+    """后台线程：从师生问答对提取教学经验并写入 fiveLayerKnowledge。"""
+    from ..database import SessionLocal
+    from ..services.experience_extractor import (
+        extract_experience_from_qa,
+        merge_experience_into_five_layer,
+    )
+    import asyncio
+    import logging as _logging
+    from sqlalchemy.orm.attributes import flag_modified
+
+    _logger = _logging.getLogger(__name__)
+    db = SessionLocal()
+    try:
+        agent = db.query(Agent).filter(Agent.id == agent_id).first()
+        if agent is None:
+            return
+
+        experience = asyncio.run(
+            extract_experience_from_qa(
+                db=db,
+                agent=agent,
+                student_question=student_question,
+                teacher_reply=teacher_reply,
+            )
+        )
+        if not experience:
+            _logger.info(f"问答沉淀：未提取到有价值经验（agent={agent_id}）")
+            return
+
+        config = agent.config
+        if isinstance(config, str):
+            config = json.loads(config) if config else {}
+        if not isinstance(config, dict):
+            config = {}
+        five_layer = config.get("fiveLayerKnowledge") or {}
+        if not isinstance(five_layer, dict):
+            five_layer = {}
+
+        five_layer = merge_experience_into_five_layer(
+            five_layer, experience, source="qa"
+        )
+        config["fiveLayerKnowledge"] = five_layer
+        agent.config = config
+        flag_modified(agent, "config")
+        db.commit()
+
+        diag = len(experience.get("diagnosis", {}).get("pain_points", []))
+        strat = len(experience.get("strategy", {}).get("strategies", []))
+        inter = len(experience.get("interaction", {}).get("question_templates", []))
+        fb = len(experience.get("feedback", {}).get("feedback_records", []))
+        _logger.info(f"【问答沉淀】教师 {teacher_id} 解答学生疑问，沉淀 诊断{diag} 策略{strat} 交互{inter} 反馈{fb}")
+    except Exception as e:
+        import traceback as _tb
+        _logger.warning(f"问答沉淀失败: {e}\n{''.join(_tb.format_exception(type(e), e, e.__traceback__))}")
+    finally:
+        db.close()

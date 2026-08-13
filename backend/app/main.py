@@ -301,6 +301,24 @@ def _lightweight_migrate():
             c.execute("UPDATE student_agents SET status = 'active' WHERE status IS NULL")
             conn.commit()
 
+        # 7.2 question_records 表（师生问答沉淀）
+        c.execute("""CREATE TABLE IF NOT EXISTS question_records (
+            id INTEGER PRIMARY KEY,
+            agent_id INTEGER,
+            student_id INTEGER,
+            conversation_id INTEGER,
+            question TEXT,
+            ai_answer TEXT,
+            teacher_reply TEXT,
+            pain_point VARCHAR,
+            subject VARCHAR,
+            status VARCHAR DEFAULT 'open',
+            created_at DATETIME,
+            answered_at DATETIME
+        )""")
+        conn.commit()
+        logger.info("question_records table ensured")
+
         # 8. lesson_plans 表
         c.execute("""CREATE TABLE IF NOT EXISTS lesson_plans (
             id INTEGER PRIMARY KEY,

@@ -152,6 +152,124 @@ async def extract_experience_from_conversation(
     return result
 
 
+async def extract_experience_from_qa(
+    db: Session,
+    agent: Agent,
+    student_question: str,
+    teacher_reply: str,
+) -> dict | None:
+    """从「学生问题 + 教师解答」问答对中提取教学经验（L2-L5）。
+
+    这是师生问答沉淀的核心入口：学生真实提问暴露痛点 → 教师给出针对性解答 →
+    从问答对中提炼诊断（L2）、策略（L3）、交互话术（L4）、效果反馈（L5）。
+    """
+    from ..config import settings
+
+    if not settings.SILICONFLOW_API_KEY or settings.SILICONFLOW_API_KEY.startswith("sk-your"):
+        return None
+
+    config = agent.config
+    if isinstance(config, str):
+        try:
+            config = json.loads(config) if config else {}
+        except (ValueError, TypeError):
+            config = {}
+    if not isinstance(config, dict):
+        config = {}
+
+    subject = ""
+    course_info = config.get("course_info", {}) if isinstance(config.get("course_info"), dict) else {}
+    subject = course_info.get("subject") or config.get("subject") or agent.course_name or ""
+
+    prompt = f"""你是一位教学经验分析专家。以下是真实发生的"学生疑问 + 教师解答"，请从中提炼出可复用的教师教学经验。
+
+## 课程信息
+- 课程：{agent.course_name}
+- 学科：{subject}
+
+## 学生疑问（真实暴露的痛点）
+{student_question[:800]}
+
+## 教师解答（针对性解决方案）
+{teacher_reply[:1500]}
+
+## 提取要求
+从这段问答中提炼教师的教学经验，输出到四个层面。仅提取问答中明确体现的经验，不要编造。
+
+输出 JSON 对象，格式如下：
+{{
+  "diagnosis": {{
+    "pain_points": [
+      {{
+        "surface_error": "学生表现出的错误或困惑（来自学生疑问）",
+        "teacher_diagnosis": "教师对学生问题的判断",
+        "root_cause": "问题的根本原因",
+        "solution": "教师的解决对策"
+      }}
+    ]
+  }},
+  "strategy": {{
+    "strategies": [
+      {{
+        "method": "教师采用的教学方法（如隔离体法）",
+        "reasoning": "为什么这个方法有效",
+        "steps": ["第一步", "第二步", "第三步"],
+        "applicable_scenario": "适用场景"
+      }}
+    ]
+  }},
+  "interaction": {{
+    "question_templates": [
+      {{
+        "scenario": "使用场景",
+        "prompt": "教师引导/提醒学生的话术",
+        "goal": "提问目标",
+        "steps": ["引导步骤1", "引导步骤2"]
+      }}
+    ]
+  }},
+  "feedback": {{
+    "feedback_records": [
+      {{
+        "applied_in": "应用场景",
+        "strategy_ref": "关联的策略",
+        "student_response": "学生反应",
+        "effectiveness": "预期效果",
+        "optimization": "优化建议"
+      }}
+    ]
+  }}
+}}
+
+## 判断标准
+1. 仅当问答中明确体现了教学经验时才提取，避免过度解读
+2. 每个层面最多提取 2 条最有价值的经验
+3. 如果某层面没有有价值的内容，返回空数组
+4. 教师的解决方案步骤（steps）是核心资产，务必完整保留
+5. 学生疑问中的具体错误/困惑表述应作为 diagnosis.pain_points.surface_error
+
+直接输出 JSON，不要添加任何解释。"""
+
+    result = await _call_llm_json(prompt, max_tokens=2500)
+    if not result or not isinstance(result, dict):
+        return None
+
+    # 检查是否有实际提取到内容
+    has_content = False
+    for layer in ("diagnosis", "strategy", "interaction", "feedback"):
+        layer_data = result.get(layer, {})
+        if isinstance(layer_data, dict):
+            for key in ("pain_points", "strategies", "question_templates", "feedback_records"):
+                items = layer_data.get(key, [])
+                if isinstance(items, list) and len(items) > 0:
+                    has_content = True
+                    break
+    if not has_content:
+        return None
+
+    return result
+
+
 def merge_experience_into_five_layer(
     five_layer: dict,
     experience: dict,
@@ -164,7 +282,6 @@ def merge_experience_into_five_layer(
     - interaction → interaction_layer.question_templates
     - feedback → feedback_layer.feedback_records
     """
-    # 确保五层结构存在
     for key in ("knowledge_layer", "diagnosis_layer", "strategy_layer",
                 "interaction_layer", "feedback_layer"):
         if key not in five_layer:
