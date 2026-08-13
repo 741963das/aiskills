@@ -1,0 +1,1217 @@
+{
+  "schemaVersion": "2026.07.22.00.00.00",
+  "skillProvenance": {
+    "name": "solo-design",
+    "version": "2026.07.22.00.00.00",
+    "version_source": "skill-release-manifest.json",
+    "release": "prompt-base-cloud-ssot-migration",
+    "read_status": "loaded"
+  },
+  "project": {
+    "resolvedLane": "complex_html_page",
+    "intentProfile": {
+      "caseFamily": "free_exploration",
+      "sourceType": "codebase-reference",
+      "multiDeviceProject": false,
+      "interactionStateExpansion": false
+    },
+    "selectedIntentWorkflowRead": true,
+    "contextRequirementsLoaded": [
+      {
+        "path": "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "shared-runtime/design-artifact-formats/design-project-file-format.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "shared-runtime/orchestration-summary-contract/orchestration-summary-contract.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "delivery-quality/reference-material-ingestion-rules.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "delivery-quality/long-requirement-intake-rules.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "delivery-quality/delivery-evidence-contract.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "delivery-quality/page-rendering-quality-gate.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "delivery-quality/design-artifact-validation.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "visual-experience/visual-experience-guidelines.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "visual-experience/visual-checkpoint-protocol.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      }
+    ],
+    "contextReadScope": [
+      "intent-workflows/intent-project-complex-build/INTENT_WORKFLOW.md",
+      "intent-workflows/intent-project-complex-build/start-complex-project-build.md",
+      "intent-workflows/intent-project-complex-build/00-requirement-and-style-intake.md",
+      "intent-workflows/intent-project-complex-build/02-page-composition.md",
+      "intent-workflows/intent-project-complex-build/orchestration-summary-fields.md",
+      "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+      "shared-runtime/design-artifact-formats/design-project-file-format.md",
+      "shared-runtime/orchestration-summary-contract/orchestration-summary-contract.md",
+      "delivery-quality/reference-material-ingestion-rules.md",
+      "delivery-quality/long-requirement-intake-rules.md",
+      "delivery-quality/delivery-evidence-contract.md",
+      "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+      "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+      "delivery-quality/page-rendering-quality-gate.md",
+      "delivery-quality/design-artifact-validation.md",
+      "visual-experience/visual-experience-guidelines.md",
+      "visual-experience/visual-checkpoint-protocol.md"
+    ],
+    "validationRunDiscipline": "validate-design-workspace.mjs",
+    "lowValueCallWatchdog": {
+      "applies": true,
+      "noProgressNextAction": "proceed_to_dispatch_or_readiness"
+    },
+    "operation": "create",
+    "deviceType": "desktop",
+    "projectName": "AI Skills 产品原型",
+    "designRead": "Education SaaS / teachers & students / professional & trustworthy / medium-high density / avoid playful illustration overload",
+    "designDials": {
+      "layoutVariance": 3,
+      "motionIntensity": 2,
+      "visualDensity": 4
+    },
+    "styleDefinitionBrief": "Modern education SaaS with indigo primary and cyan accent, clean card-based UI, generous whitespace, and precise data tables for teachers and students.",
+    "cssPreflightEvidence": {
+      "command": "node apply-html-head-contract.mjs colors_and_type.css .preflight/preflight.html --title=Preflight --lang=zh-CN --prefix=ai",
+      "status": "success",
+      "outputPath": "e:\\aiskills\\ai-skills-prototypes\\.preflight\\preflight.html",
+      "verifiedAt": "2026-08-11T20:35:00+08:00"
+    },
+    "generationTree": {
+      "root": {
+        "nodeId": "gen-project-shell",
+        "kind": "project-shell",
+        "pageIds": [
+          "page-teacher-dashboard",
+          "page-skill-create-step2",
+          "page-knowledge-base",
+          "page-skill-preview",
+          "page-student-dashboard"
+        ],
+        "output": "partials/project-shell.html",
+        "sharedRegions": [
+          "top-header",
+          "sidebar-nav",
+          "page-frame",
+          "background"
+        ],
+        "mutableSlots": [
+          "pageTitle",
+          "activeNavItem",
+          "roleBadge",
+          "mainContent"
+        ],
+        "status": "completed",
+        "children": [
+          {
+            "nodeId": "gen-page-teacher-dashboard",
+            "kind": "page-leaf",
+            "pageIds": [
+              "page-teacher-dashboard"
+            ],
+            "output": "pages/teacher-dashboard.html",
+            "status": "completed",
+            "children": []
+          },
+          {
+            "nodeId": "gen-page-skill-create-step2",
+            "kind": "page-leaf",
+            "pageIds": [
+              "page-skill-create-step2"
+            ],
+            "output": "pages/skill-create-step2.html",
+            "status": "completed",
+            "children": []
+          },
+          {
+            "nodeId": "gen-page-knowledge-base",
+            "kind": "page-leaf",
+            "pageIds": [
+              "page-knowledge-base"
+            ],
+            "output": "pages/knowledge-base.html",
+            "status": "completed",
+            "children": []
+          },
+          {
+            "nodeId": "gen-page-skill-preview",
+            "kind": "page-leaf",
+            "pageIds": [
+              "page-skill-preview"
+            ],
+            "output": "pages/skill-preview.html",
+            "status": "completed",
+            "children": []
+          },
+          {
+            "nodeId": "gen-page-student-dashboard",
+            "kind": "page-leaf",
+            "pageIds": [
+              "page-student-dashboard"
+            ],
+            "output": "pages/student-dashboard.html",
+            "status": "completed",
+            "children": []
+          }
+        ]
+      }
+    },
+    "dispatchPreflightManifest": [
+      {
+        "recorded_at": "2026-08-11T12:40:28.927Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ComplexPagePacket",
+        "laneContract": {
+          "resolvedLane": "complex_html_page",
+          "packetType": "ComplexPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-complex-build/complex-page-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+        "nodeId": "page-teacher-dashboard",
+        "htmlSrc": "pages/teacher-dashboard.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/teacher-dashboard.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/teacher-dashboard.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design",
+          "deterministicToolDir": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\validate-design-workspace.mjs",
+            "validateFinishReadiness": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\validate-finish-readiness.mjs",
+            "validateRestoreContract": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node \"c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\record-dispatch-completion.mjs\" \"e:\\aiskills\\ai-skills-prototypes\" --node-id=\"page-teacher-dashboard\" --html-src=\"pages/teacher-dashboard.html\" --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "e:\\aiskills\\ai-skills-prototypes\\colors_and_type.css",
+        "htmlFilePath": "e:\\aiskills\\ai-skills-prototypes\\pages\\teacher-dashboard.html",
+        "brandPrefix": "ai",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node \"c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\apply-html-head-contract.mjs\" \"e:\\aiskills\\ai-skills-prototypes\\colors_and_type.css\" \"e:\\aiskills\\ai-skills-prototypes\\pages\\teacher-dashboard.html\" --title=\"教师工作台\" --lang=\"zh-CN\" --prefix=\"ai\"",
+        "headFillMode": "skeleton-first",
+        "viewportMode": null,
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "ai-skills-prototypes.design": "6863ac8eedc3621dc9e7de33afca7ecc8b72b49150931b4ed9c47d4b510f9ad3"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-complex-build/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md",
+            "visual-experience/visual-experience-guidelines.md",
+            "visual-experience/visual-checkpoint-protocol.md"
+          ],
+          "optionalContextFiles": [],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": false,
+          "appliesToThisPage": false,
+          "canonicalHtmlIncluded": false,
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      },
+      {
+        "recorded_at": "2026-08-11T12:40:28.927Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ComplexPagePacket",
+        "laneContract": {
+          "resolvedLane": "complex_html_page",
+          "packetType": "ComplexPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-complex-build/complex-page-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+        "nodeId": "page-skill-create-step2",
+        "htmlSrc": "pages/skill-create-step2.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/skill-create-step2.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/skill-create-step2.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design",
+          "deterministicToolDir": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\validate-design-workspace.mjs",
+            "validateFinishReadiness": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\validate-finish-readiness.mjs",
+            "validateRestoreContract": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node \"c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\record-dispatch-completion.mjs\" \"e:\\aiskills\\ai-skills-prototypes\" --node-id=\"page-skill-create-step2\" --html-src=\"pages/skill-create-step2.html\" --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "e:\\aiskills\\ai-skills-prototypes\\colors_and_type.css",
+        "htmlFilePath": "e:\\aiskills\\ai-skills-prototypes\\pages\\skill-create-step2.html",
+        "brandPrefix": "ai",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node \"c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\apply-html-head-contract.mjs\" \"e:\\aiskills\\ai-skills-prototypes\\colors_and_type.css\" \"e:\\aiskills\\ai-skills-prototypes\\pages\\skill-create-step2.html\" --title=\"创建助手·教学信息采集\" --lang=\"zh-CN\" --prefix=\"ai\"",
+        "headFillMode": "skeleton-first",
+        "viewportMode": null,
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "ai-skills-prototypes.design": "6863ac8eedc3621dc9e7de33afca7ecc8b72b49150931b4ed9c47d4b510f9ad3"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-complex-build/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md",
+            "visual-experience/visual-experience-guidelines.md",
+            "visual-experience/visual-checkpoint-protocol.md"
+          ],
+          "optionalContextFiles": [],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": false,
+          "appliesToThisPage": false,
+          "canonicalHtmlIncluded": false,
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      },
+      {
+        "recorded_at": "2026-08-11T12:40:28.927Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ComplexPagePacket",
+        "laneContract": {
+          "resolvedLane": "complex_html_page",
+          "packetType": "ComplexPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-complex-build/complex-page-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+        "nodeId": "page-knowledge-base",
+        "htmlSrc": "pages/knowledge-base.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/knowledge-base.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/knowledge-base.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design",
+          "deterministicToolDir": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\validate-design-workspace.mjs",
+            "validateFinishReadiness": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\validate-finish-readiness.mjs",
+            "validateRestoreContract": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node \"c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\record-dispatch-completion.mjs\" \"e:\\aiskills\\ai-skills-prototypes\" --node-id=\"page-knowledge-base\" --html-src=\"pages/knowledge-base.html\" --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "e:\\aiskills\\ai-skills-prototypes\\colors_and_type.css",
+        "htmlFilePath": "e:\\aiskills\\ai-skills-prototypes\\pages\\knowledge-base.html",
+        "brandPrefix": "ai",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node \"c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\apply-html-head-contract.mjs\" \"e:\\aiskills\\ai-skills-prototypes\\colors_and_type.css\" \"e:\\aiskills\\ai-skills-prototypes\\pages\\knowledge-base.html\" --title=\"知识库管理\" --lang=\"zh-CN\" --prefix=\"ai\"",
+        "headFillMode": "skeleton-first",
+        "viewportMode": null,
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "ai-skills-prototypes.design": "6863ac8eedc3621dc9e7de33afca7ecc8b72b49150931b4ed9c47d4b510f9ad3"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-complex-build/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md",
+            "visual-experience/visual-experience-guidelines.md",
+            "visual-experience/visual-checkpoint-protocol.md"
+          ],
+          "optionalContextFiles": [],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": false,
+          "appliesToThisPage": false,
+          "canonicalHtmlIncluded": false,
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      },
+      {
+        "recorded_at": "2026-08-11T12:40:28.927Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ComplexPagePacket",
+        "laneContract": {
+          "resolvedLane": "complex_html_page",
+          "packetType": "ComplexPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-complex-build/complex-page-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+        "nodeId": "page-skill-preview",
+        "htmlSrc": "pages/skill-preview.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/skill-preview.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/skill-preview.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design",
+          "deterministicToolDir": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\validate-design-workspace.mjs",
+            "validateFinishReadiness": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\validate-finish-readiness.mjs",
+            "validateRestoreContract": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node \"c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\record-dispatch-completion.mjs\" \"e:\\aiskills\\ai-skills-prototypes\" --node-id=\"page-skill-preview\" --html-src=\"pages/skill-preview.html\" --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "e:\\aiskills\\ai-skills-prototypes\\colors_and_type.css",
+        "htmlFilePath": "e:\\aiskills\\ai-skills-prototypes\\pages\\skill-preview.html",
+        "brandPrefix": "ai",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node \"c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\apply-html-head-contract.mjs\" \"e:\\aiskills\\ai-skills-prototypes\\colors_and_type.css\" \"e:\\aiskills\\ai-skills-prototypes\\pages\\skill-preview.html\" --title=\"技能预览与调试\" --lang=\"zh-CN\" --prefix=\"ai\"",
+        "headFillMode": "skeleton-first",
+        "viewportMode": null,
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "ai-skills-prototypes.design": "6863ac8eedc3621dc9e7de33afca7ecc8b72b49150931b4ed9c47d4b510f9ad3"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-complex-build/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md",
+            "visual-experience/visual-experience-guidelines.md",
+            "visual-experience/visual-checkpoint-protocol.md"
+          ],
+          "optionalContextFiles": [],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": false,
+          "appliesToThisPage": false,
+          "canonicalHtmlIncluded": false,
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      },
+      {
+        "recorded_at": "2026-08-11T12:40:28.927Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ComplexPagePacket",
+        "laneContract": {
+          "resolvedLane": "complex_html_page",
+          "packetType": "ComplexPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-complex-build/complex-page-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+        "nodeId": "page-student-dashboard",
+        "htmlSrc": "pages/student-dashboard.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/student-dashboard.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/student-dashboard.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design",
+          "deterministicToolDir": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\validate-design-workspace.mjs",
+            "validateFinishReadiness": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\validate-finish-readiness.mjs",
+            "validateRestoreContract": "c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node \"c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\record-dispatch-completion.mjs\" \"e:\\aiskills\\ai-skills-prototypes\" --node-id=\"page-student-dashboard\" --html-src=\"pages/student-dashboard.html\" --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "e:\\aiskills\\ai-skills-prototypes\\colors_and_type.css",
+        "htmlFilePath": "e:\\aiskills\\ai-skills-prototypes\\pages\\student-dashboard.html",
+        "brandPrefix": "ai",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node \"c:\\Users\\Admin（无密码）\\.trae-cn\\builtin\\design\\default\\skills\\solo-design\\shared-runtime\\deterministic-tooling\\apply-html-head-contract.mjs\" \"e:\\aiskills\\ai-skills-prototypes\\colors_and_type.css\" \"e:\\aiskills\\ai-skills-prototypes\\pages\\student-dashboard.html\" --title=\"学生学习台\" --lang=\"zh-CN\" --prefix=\"ai\"",
+        "headFillMode": "skeleton-first",
+        "viewportMode": null,
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "ai-skills-prototypes.design": "6863ac8eedc3621dc9e7de33afca7ecc8b72b49150931b4ed9c47d4b510f9ad3"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-complex-build/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md",
+            "visual-experience/visual-experience-guidelines.md",
+            "visual-experience/visual-checkpoint-protocol.md"
+          ],
+          "optionalContextFiles": [],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": false,
+          "appliesToThisPage": false,
+          "canonicalHtmlIncluded": false,
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      }
+    ],
+    "wiringPlan": [],
+    "hiddenInteractionPlan": [],
+    "validationHistory": [],
+    "validationRepairLedger": [],
+    "mobileNavigation": {
+      "applies": false
+    },
+    "sharedProjectShellContract": {
+      "shellType": "web-app-sidebar",
+      "frame": {
+        "layout": "fixed-left-sidebar + scrollable-main",
+        "sidebarWidth": "240px",
+        "headerHeight": "64px",
+        "background": "var(--ai-background)",
+        "surface": "var(--ai-card)"
+      },
+      "topHeader": {
+        "heightPx": 64,
+        "background": "var(--ai-card)",
+        "borderBottom": "1px solid var(--ai-border)",
+        "contents": [
+          "logo",
+          "search",
+          "notifications",
+          "user-avatar"
+        ],
+        "fixed": true
+      },
+      "sidebar": {
+        "widthPx": 240,
+        "background": "var(--ai-card)",
+        "borderRight": "1px solid var(--ai-border)",
+        "navItems": {
+          "teacher": [
+            {
+              "key": "dashboard",
+              "label": "工作台",
+              "icon": "layout-dashboard"
+            },
+            {
+              "key": "my-agents",
+              "label": "我的助手",
+              "icon": "bot"
+            },
+            {
+              "key": "knowledge",
+              "label": "知识库",
+              "icon": "book-open"
+            },
+            {
+              "key": "marketplace",
+              "label": "助手市场",
+              "icon": "store"
+            },
+            {
+              "key": "analytics",
+              "label": "数据分析",
+              "icon": "bar-chart-2"
+            }
+          ],
+          "student": [
+            {
+              "key": "student-home",
+              "label": "学习首页",
+              "icon": "home"
+            },
+            {
+              "key": "student-courses",
+              "label": "我的课程",
+              "icon": "book-open"
+            },
+            {
+              "key": "student-chat",
+              "label": "AI 辅导",
+              "icon": "message-circle"
+            },
+            {
+              "key": "student-reports",
+              "label": "学习报告",
+              "icon": "file-text"
+            }
+          ]
+        },
+        "activeRule": "indigo background tint, indigo text, left border highlight"
+      },
+      "mutableSlots": [
+        "pageTitle",
+        "activeNavItem",
+        "roleBadge",
+        "mainContent"
+      ]
+    },
+    "visualQualityCheckpoints": [
+      {
+        "checkpointId": "vq-anchor",
+        "dimension": "visual-anchor",
+        "expected": "Each screen opens with a clear page title + context row or hero metric that identifies the screen purpose.",
+        "evidenceTarget": "pages/*.html header region"
+      },
+      {
+        "checkpointId": "vq-hierarchy",
+        "dimension": "information-hierarchy",
+        "expected": "Stats/cards → tables/forms → secondary panels; primary actions use solid indigo, secondary use outline.",
+        "evidenceTarget": "pages/*.html main content"
+      },
+      {
+        "checkpointId": "vq-structure",
+        "dimension": "composition-structure",
+        "expected": "Consistent 24px gaps, white cards on slate background, restrained 10–14px radius, no overflow on desktop.",
+        "evidenceTarget": "pages/*.html layout"
+      },
+      {
+        "checkpointId": "vq-implementation",
+        "dimension": "implementation-strategy",
+        "expected": "Tailwind CSS utility classes + CSS variables from colors_and_type.css; Lucide icons via script; shared shell partial.",
+        "evidenceTarget": "project shell + page HTML"
+      }
+    ],
+    "readScopeLedger": [
+      {
+        "actor": "page-sub-agent",
+        "lane": "complex_html_page",
+        "path": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+        "reason": "page runtime guide",
+        "scopeClass": "page-runtime",
+        "declaredBeforeRead": true,
+        "recordedAt": "2026-08-11T12:40:28.927Z",
+        "nodeId": "page-teacher-dashboard",
+        "htmlSrc": "pages/teacher-dashboard.html"
+      },
+      {
+        "actor": "page-sub-agent",
+        "lane": "complex_html_page",
+        "path": "intent-workflows/intent-project-complex-build/complex-page-dispatch-contract.md",
+        "reason": "dispatch contract",
+        "scopeClass": "dispatch-contract",
+        "declaredBeforeRead": true,
+        "recordedAt": "2026-08-11T12:40:28.927Z",
+        "nodeId": "page-teacher-dashboard",
+        "htmlSrc": "pages/teacher-dashboard.html"
+      }
+    ],
+    "expectedDispatches": [
+      {
+        "nodeId": "page-knowledge-base",
+        "pageId": "page-knowledge-base",
+        "targetPageId": "page-knowledge-base",
+        "htmlSrc": "pages/knowledge-base.html",
+        "packetType": "ComplexPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/knowledge-base.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "knowledge-base-generated",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-08-11T13:17:01.885Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "nodeId": "page-teacher-dashboard",
+        "pageId": "page-teacher-dashboard",
+        "targetPageId": "page-teacher-dashboard",
+        "htmlSrc": "pages/teacher-dashboard.html",
+        "packetType": "ComplexPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/teacher-dashboard.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "teacher-dashboard-generated",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-08-11T13:16:52.273Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "nodeId": "page-student-dashboard",
+        "pageId": "page-student-dashboard",
+        "targetPageId": "page-student-dashboard",
+        "htmlSrc": "pages/student-dashboard.html",
+        "packetType": "ComplexPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/student-dashboard.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "student-dashboard-generated",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-08-11T13:17:17.928Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "nodeId": "page-skill-preview",
+        "pageId": "page-skill-preview",
+        "targetPageId": "page-skill-preview",
+        "htmlSrc": "pages/skill-preview.html",
+        "packetType": "ComplexPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/skill-preview.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "skill-preview-generated",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-08-11T13:17:08.185Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "nodeId": "page-skill-create-step2",
+        "pageId": "page-skill-create-step2",
+        "targetPageId": "page-skill-create-step2",
+        "htmlSrc": "pages/skill-create-step2.html",
+        "packetType": "ComplexPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/skill-create-step2.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "skill-create-step2-generated",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-08-11T13:16:57.242Z",
+        "source": "record-dispatch-completion.mjs"
+      }
+    ],
+    "mainAgentPostDispatchMutations": [
+      {
+        "path": "pages/teacher-dashboard.html",
+        "reason": "add data-dom-id attributes for registered interactions",
+        "owner": "main-agent",
+        "recordedAt": "2026-08-11T13:16:52.273Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "path": "ai-skills-prototypes.design",
+        "reason": "register page interactions in devMetadata",
+        "owner": "main-agent",
+        "recordedAt": "2026-08-11T13:16:52.273Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "path": "pages/skill-create-step2.html",
+        "reason": "add data-dom-id attributes for registered interactions",
+        "owner": "main-agent",
+        "recordedAt": "2026-08-11T13:16:57.242Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "path": "pages/knowledge-base.html",
+        "reason": "add data-dom-id attributes for registered interactions",
+        "owner": "main-agent",
+        "recordedAt": "2026-08-11T13:17:01.885Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "path": "pages/skill-preview.html",
+        "reason": "add data-dom-id attributes for registered interactions",
+        "owner": "main-agent",
+        "recordedAt": "2026-08-11T13:17:08.185Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "path": "pages/student-dashboard.html",
+        "reason": "add data-dom-id attributes for registered interactions",
+        "owner": "main-agent",
+        "recordedAt": "2026-08-11T13:17:17.928Z",
+        "source": "record-dispatch-completion.mjs"
+      }
+    ]
+  },
+  "designSource": {
+    "operatingMode": "free-explore",
+    "cssFilePath": "colors_and_type.css",
+    "brandPrefix": "ai",
+    "designLibrary": null,
+    "styleConstraints": {
+      "primaryHue": "indigo",
+      "accentHue": "cyan",
+      "radiusMax": 16,
+      "staticShadowAlphaMax": 0.05,
+      "noSecondary": true,
+      "noExtraBrandHue": true
+    },
+    "styleContinuityAnchors": {
+      "colorSystem": "Indigo primary #4F46E5, cyan accent #0891B2, slate neutrals #F8FAFC to #0F172A",
+      "typographySystem": "Inter + Noto Sans SC, display/h1/h2/h3/body/small/caption scale",
+      "surfaceAndDepth": "White cards on slate-50 background, border-led static surfaces, shadow only for floating layers",
+      "radiusScale": "6px sm / 10px md / 14px lg / 9999px full",
+      "shapeLanguage": "Rounded rectangles, soft but precise, no sharp corners on cards and buttons"
+    }
+  },
+  "pages": [
+    {
+      "nodeId": "page-teacher-dashboard",
+      "title": "教师工作台",
+      "htmlSrc": "pages/teacher-dashboard.html",
+      "pageIndex": 1,
+      "pageType": "information-dense",
+      "visualNorthStar": "A clean command center for teachers: top stats row, quick-action cards, and a recent-skills table with status badges.",
+      "compositionPattern": "Sidebar + header frame, three-row main: stats → quick actions → data table.",
+      "continuityAnchors": [
+        "Shared indigo/cyan palette",
+        "Card-based content areas",
+        "Sidebar navigation pattern"
+      ],
+      "componentPlan": [
+        "stat-card",
+        "quick-action-card",
+        "data-table",
+        "status-badge",
+        "sidebar-nav",
+        "top-header"
+      ],
+      "imagePlan": [],
+      "chartsRequired": false,
+      "domIdsRequired": [
+        "nav-dashboard",
+        "nav-my-agents",
+        "nav-knowledge",
+        "nav-marketplace",
+        "quick-create",
+        "quick-knowledge",
+        "skill-row-1"
+      ]
+    },
+    {
+      "nodeId": "page-skill-create-step2",
+      "title": "创建助手·教学信息采集",
+      "htmlSrc": "pages/skill-create-step2.html",
+      "pageIndex": 2,
+      "pageType": "task-driven",
+      "visualNorthStar": "A focused multi-step wizard with a top stepper and tabbed form sections for structured teaching information.",
+      "compositionPattern": "Stepper header + tab bar + single-column form groups + sticky bottom action bar.",
+      "continuityAnchors": [
+        "Shared indigo/cyan palette",
+        "Card-based content areas",
+        "Sidebar navigation pattern"
+      ],
+      "componentPlan": [
+        "stepper",
+        "tab-bar",
+        "form-input",
+        "tag-input",
+        "select-chip",
+        "action-bar",
+        "sidebar-nav"
+      ],
+      "imagePlan": [],
+      "chartsRequired": false,
+      "domIdsRequired": [
+        "nav-dashboard",
+        "step-2",
+        "tab-basic",
+        "tab-teacher",
+        "tab-content",
+        "tab-method",
+        "tab-evaluation",
+        "tab-resources",
+        "next-step",
+        "prev-step"
+      ]
+    },
+    {
+      "nodeId": "page-knowledge-base",
+      "title": "知识库管理",
+      "htmlSrc": "pages/knowledge-base.html",
+      "pageIndex": 3,
+      "pageType": "task-driven",
+      "visualNorthStar": "A file-management workspace with an upload dropzone, processing-status table, and a test-retrieval panel.",
+      "compositionPattern": "Two-column main: upload + file list left, vector DB info + test search right.",
+      "continuityAnchors": [
+        "Shared indigo/cyan palette",
+        "Card-based content areas",
+        "Sidebar navigation pattern"
+      ],
+      "componentPlan": [
+        "dropzone",
+        "file-table",
+        "status-badge",
+        "info-card",
+        "test-search",
+        "sidebar-nav"
+      ],
+      "imagePlan": [],
+      "chartsRequired": false,
+      "domIdsRequired": [
+        "nav-knowledge",
+        "upload-zone",
+        "test-search-input",
+        "search-btn"
+      ]
+    },
+    {
+      "nodeId": "page-skill-preview",
+      "title": "技能预览与调试",
+      "htmlSrc": "pages/skill-preview.html",
+      "pageIndex": 4,
+      "pageType": "task-driven",
+      "visualNorthStar": "A split-view chat tester: collapsible config panel on the left, conversation stream with cited sources on the right.",
+      "compositionPattern": "Three-column layout: config sidebar, chat stream, input anchored bottom; source citations under each assistant message.",
+      "continuityAnchors": [
+        "Shared indigo/cyan palette",
+        "Card-based content areas",
+        "Sidebar navigation pattern"
+      ],
+      "componentPlan": [
+        "chat-stream",
+        "message-bubble",
+        "source-citation",
+        "config-panel",
+        "feedback-btn",
+        "sidebar-nav"
+      ],
+      "imagePlan": [],
+      "chartsRequired": false,
+      "domIdsRequired": [
+        "nav-my-agents",
+        "chat-input",
+        "send-btn",
+        "publish-btn",
+        "feedback-good",
+        "feedback-bad"
+      ]
+    },
+    {
+      "nodeId": "page-student-dashboard",
+      "title": "学生学习台",
+      "htmlSrc": "pages/student-dashboard.html",
+      "pageIndex": 5,
+      "pageType": "information-dense",
+      "visualNorthStar": "A welcoming student hub: progress summary, enrolled courses grid, and quick entry to AI tutoring chat.",
+      "compositionPattern": "Top header with student nav, main: progress cards → course grid → recent activity.",
+      "continuityAnchors": [
+        "Shared indigo/cyan palette",
+        "Card-based content areas",
+        "Rounded buttons and badges"
+      ],
+      "componentPlan": [
+        "progress-card",
+        "course-card",
+        "activity-feed",
+        "avatar",
+        "top-header"
+      ],
+      "imagePlan": [],
+      "chartsRequired": false,
+      "domIdsRequired": [
+        "nav-student-home",
+        "nav-student-courses",
+        "nav-student-chat",
+        "course-card-1",
+        "chat-entry"
+      ]
+    }
+  ],
+  "assets": []
+}

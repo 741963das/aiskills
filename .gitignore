@@ -1,0 +1,57 @@
+# ===== Backend =====
+# Environment variables (contains API keys)
+backend/.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+
+# SQLite databases
+*.db
+*.sqlite3
+
+# Chroma vector data
+backend/chroma_data/
+
+# Uploaded files & generated outputs
+backend/uploads/
+backend/outputs/
+
+# Logs
+*.log
+logs/
+
+# Temporary scripts (used for demos / debugging, not core code)
+backend/_reset_pwd_temp.py
+
+# ===== Frontend =====
+frontend/node_modules/
+frontend/dist/
+
+# ===== OS / Editor =====
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ===== Docs (keep PRD, exclude temp) =====
+# Keep: PRD_v1.1_SQLite.docx, teacher.md
+
+# ===== Temporary demo artifacts (regenerable) =====
+backend/five_layer_export_demo.json
+backend/physics_five_layer_export.json
+_backup_*.py
+_temp*.py
+*.marker
+_cleanup_once_done.marker
+
+# ===== Design / share packages =====
+.trae-html-share-packages/
+.claude/
+.trae/

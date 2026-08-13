@@ -1,0 +1,91 @@
+<!-- Shared project shell: fixed sidebar + scrollable main area -->
+<div class="font-sans min-h-screen flex bg-[var(--ai-background)] text-[var(--ai-foreground)]">
+
+  <!-- Left sidebar -->
+  <aside id="sidebar" class="fixed top-0 left-0 z-20 h-screen w-60 bg-[var(--ai-card)] border-r border-[var(--ai-border)] flex flex-col" style="box-shadow: var(--shadow-sm);">
+    <nav class="flex-1 overflow-y-auto py-5 px-3 space-y-1">
+      <a id="nav-dashboard" href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-[var(--radius-md)] text-sm font-medium text-[var(--ai-muted-foreground)] hover:bg-[var(--ai-muted)] hover:text-[var(--ai-foreground)] transition-colors">
+        <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+        <span>工作台</span>
+      </a>
+      <a id="nav-my-agents" href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-[var(--radius-md)] text-sm font-medium text-[var(--ai-muted-foreground)] hover:bg-[var(--ai-muted)] hover:text-[var(--ai-foreground)] transition-colors">
+        <i data-lucide="bot" class="w-5 h-5"></i>
+        <span>我的助手</span>
+      </a>
+      <a id="nav-knowledge" href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-[var(--radius-md)] text-sm font-medium text-[var(--ai-muted-foreground)] hover:bg-[var(--ai-muted)] hover:text-[var(--ai-foreground)] transition-colors">
+        <i data-lucide="book-open" class="w-5 h-5"></i>
+        <span>知识库</span>
+      </a>
+      <a id="nav-marketplace" href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-[var(--radius-md)] text-sm font-medium text-[var(--ai-muted-foreground)] hover:bg-[var(--ai-muted)] hover:text-[var(--ai-foreground)] transition-colors">
+        <i data-lucide="store" class="w-5 h-5"></i>
+        <span>助手市场</span>
+      </a>
+      <a id="nav-analytics" href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-[var(--radius-md)] text-sm font-medium text-[var(--ai-muted-foreground)] hover:bg-[var(--ai-muted)] hover:text-[var(--ai-foreground)] transition-colors">
+        <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
+        <span>数据分析</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Main wrapper -->
+  <div class="flex-1 flex flex-col ml-60">
+
+    <!-- Top header -->
+    <header id="top-header" class="fixed top-0 right-0 left-60 z-10 h-16 bg-[var(--ai-card)] border-b border-[var(--ai-border)] flex items-center justify-between px-6" style="box-shadow: var(--shadow-sm);">
+      <!-- Logo -->
+      <div class="flex items-center gap-2 w-60 shrink-0">
+        <div class="w-8 h-8 rounded-[var(--radius-md)] bg-[var(--ai-primary)] flex items-center justify-center text-[var(--ai-primary-foreground)]">
+          <i data-lucide="sparkles" class="w-5 h-5"></i>
+        </div>
+        <span class="text-lg font-bold text-[var(--ai-foreground)] tracking-tight">AI Skills</span>
+      </div>
+
+      <!-- Search -->
+      <div class="flex-1 max-w-2xl px-6">
+        <div class="relative">
+          <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--ai-muted-foreground)]"></i>
+          <input type="text" placeholder="搜索课程、助手或知识点" class="w-full h-10 pl-10 pr-4 bg-[var(--ai-muted)] border border-[var(--ai-border)] rounded-[var(--radius-lg)] text-sm text-[var(--ai-foreground)] placeholder:text-[var(--ai-muted-foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--ai-ring)] focus:border-transparent transition-all" />
+        </div>
+      </div>
+
+      <!-- Right actions -->
+      <div class="flex items-center gap-4 shrink-0">
+        <button type="button" class="relative w-10 h-10 rounded-[var(--radius-md)] hover:bg-[var(--ai-muted)] flex items-center justify-center text-[var(--ai-muted-foreground)] transition-colors" aria-label="通知">
+          <i data-lucide="bell" class="w-5 h-5"></i>
+          <span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-[var(--ai-primary)] border-2 border-[var(--ai-card)]"></span>
+        </button>
+
+        <div class="flex items-center gap-3 pl-4 border-l border-[var(--ai-border)]">
+          <div class="w-9 h-9 rounded-full bg-[var(--ai-primary)] text-[var(--ai-primary-foreground)] flex items-center justify-center text-sm font-semibold">
+            张
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-sm font-medium text-[var(--ai-foreground)]">张教授</span>
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-[var(--ai-muted)] text-[var(--ai-muted-foreground)] border border-[var(--ai-border)]">
+              教师
+            </span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main content area -->
+    <main class="flex-1 pt-16 min-h-screen overflow-y-auto">
+      <div class="max-w-7xl mx-auto px-6 py-6">
+        <!-- SLOT: pageTitle -->
+        <div class="mb-6">
+          <!-- page title will be injected here -->
+        </div>
+
+        <!-- SLOT: activeNavItem -->
+        <!-- active nav item marker will be injected here -->
+
+        <!-- SLOT: mainContent -->
+        <div>
+          <!-- main page content will be injected here -->
+        </div>
+      </div>
+    </main>
+
+  </div>
+</div>

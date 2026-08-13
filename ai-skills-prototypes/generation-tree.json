@@ -1,0 +1,69 @@
+{
+  "root": {
+    "nodeId": "gen-project-shell",
+    "kind": "project-shell",
+    "pageIds": ["page-teacher-dashboard", "page-skill-create-step2", "page-knowledge-base", "page-skill-preview", "page-student-dashboard"],
+    "output": "partials/project-shell.html",
+    "sharedRegions": ["top-header", "sidebar-nav", "page-frame", "background"],
+    "privateRegions": [],
+    "mutableSlots": ["pageTitle", "activeNavItem", "roleBadge", "mainContent"],
+    "status": "planned",
+    "children": [
+      {
+        "nodeId": "gen-page-teacher-dashboard",
+        "kind": "page-leaf",
+        "pageIds": ["page-teacher-dashboard"],
+        "output": "pages/teacher-dashboard.html",
+        "sharedRegions": ["top-header", "sidebar-nav", "page-frame"],
+        "privateRegions": ["dashboard-content"],
+        "mutableSlots": ["pageTitle", "activeNavItem", "mainContent"],
+        "status": "planned",
+        "children": []
+      },
+      {
+        "nodeId": "gen-page-skill-create-step2",
+        "kind": "page-leaf",
+        "pageIds": ["page-skill-create-step2"],
+        "output": "pages/skill-create-step2.html",
+        "sharedRegions": ["top-header", "sidebar-nav", "page-frame"],
+        "privateRegions": ["wizard-content"],
+        "mutableSlots": ["pageTitle", "activeNavItem", "mainContent"],
+        "status": "planned",
+        "children": []
+      },
+      {
+        "nodeId": "gen-page-knowledge-base",
+        "kind": "page-leaf",
+        "pageIds": ["page-knowledge-base"],
+        "output": "pages/knowledge-base.html",
+        "sharedRegions": ["top-header", "sidebar-nav", "page-frame"],
+        "privateRegions": ["knowledge-content"],
+        "mutableSlots": ["pageTitle", "activeNavItem", "mainContent"],
+        "status": "planned",
+        "children": []
+      },
+      {
+        "nodeId": "gen-page-skill-preview",
+        "kind": "page-leaf",
+        "pageIds": ["page-skill-preview"],
+        "output": "pages/skill-preview.html",
+        "sharedRegions": ["top-header", "sidebar-nav", "page-frame"],
+        "privateRegions": ["preview-content"],
+        "mutableSlots": ["pageTitle", "activeNavItem", "mainContent"],
+        "status": "planned",
+        "children": []
+      },
+      {
+        "nodeId": "gen-page-student-dashboard",
+        "kind": "page-leaf",
+        "pageIds": ["page-student-dashboard"],
+        "output": "pages/student-dashboard.html",
+        "sharedRegions": ["top-header", "page-frame"],
+        "privateRegions": ["student-nav", "student-content"],
+        "mutableSlots": ["pageTitle", "mainContent"],
+        "status": "planned",
+        "children": []
+      }
+    ]
+  }
+}

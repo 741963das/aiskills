@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教师工作台</title>
+    <style id="theme-vars">
+/* AI Skills Education Platform — Brand Tokens */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Brand primary — Indigo */
+  --ai-50: #EEF2FF;
+  --ai-100: #E0E7FF;
+  --ai-200: #C7D2FE;
+  --ai-300: #A5B4FC;
+  --ai-400: #818CF8;
+  --ai-500: #6366F1;
+  --ai-600: #4F46E5;
+  --ai-700: #4338CA;
+  --ai-800: #3730A3;
+  --ai-900: #312E81;
+
+  /* Brand accent — Cyan */
+  --ai-cyan-50: #ECFEFF;
+  --ai-cyan-100: #CFFAFE;
+  --ai-cyan-200: #A5F3FC;
+  --ai-cyan-300: #67E8F9;
+  --ai-cyan-400: #22D3EE;
+  --ai-cyan-500: #06B6D4;
+  --ai-cyan-600: #0891B2;
+  --ai-cyan-700: #0E7490;
+
+  /* Neutral */
+  --ai-slate-50: #F8FAFC;
+  --ai-slate-100: #F1F5F9;
+  --ai-slate-200: #E2E8F0;
+  --ai-slate-300: #CBD5E1;
+  --ai-slate-400: #94A3B8;
+  --ai-slate-500: #64748B;
+  --ai-slate-600: #475569;
+  --ai-slate-700: #334155;
+  --ai-slate-800: #1E293B;
+  --ai-slate-900: #0F172A;
+
+  /* Semantic aliases */
+  --ai-background: var(--ai-slate-50);
+  --ai-foreground: var(--ai-slate-900);
+  --ai-card: #FFFFFF;
+  --ai-card-foreground: var(--ai-slate-900);
+  --ai-popover: #FFFFFF;
+  --ai-popover-foreground: var(--ai-slate-900);
+  --ai-primary: var(--ai-600);
+  --ai-primary-foreground: #FFFFFF;
+  --ai-muted: var(--ai-slate-100);
+  --ai-muted-foreground: var(--ai-slate-500);
+  --ai-border: var(--ai-slate-200);
+  --ai-input: var(--ai-slate-200);
+  --ai-ring: var(--ai-500);
+
+  /* Radius aliases */
+  --ai-radius-small: var(--radius-sm);
+  --ai-radius-medium: var(--radius-md);
+  --ai-radius-large: var(--radius-lg);
+
+  /* State colors */
+  --state-success: #059669;
+  --state-success-bg: #ECFDF5;
+  --state-warning: #D97706;
+  --state-warning-bg: #FFFBEB;
+  --state-error: #DC2626;
+  --state-error-bg: #FEF2F2;
+  --state-info: var(--ai-cyan-600);
+  --state-info-bg: var(--ai-cyan-50);
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-full: 9999px;
+
+  /* Typography */
+  --font-sans: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', monospace;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.06), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+}
+
+/* Typography classes */
+.font-sans { font-family: var(--font-sans); }
+.font-mono { font-family: var(--font-mono); }
+
+.text-display { font-size: 28px; line-height: 1.25; font-weight: 700; letter-spacing: -0.02em; }
+.text-h1 { font-size: 24px; line-height: 1.3; font-weight: 700; letter-spacing: -0.01em; }
+.text-h2 { font-size: 20px; line-height: 1.35; font-weight: 600; }
+.text-h3 { font-size: 16px; line-height: 1.4; font-weight: 600; }
+.text-body { font-size: 14px; line-height: 1.6; font-weight: 400; }
+.text-small { font-size: 13px; line-height: 1.5; font-weight: 400; }
+.text-caption { font-size: 12px; line-height: 1.4; font-weight: 500; }
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--ai-background);
+    --color-foreground: var(--ai-foreground);
+    --color-card: var(--ai-card);
+    --color-card-foreground: var(--ai-card-foreground);
+    --color-popover: var(--ai-popover);
+    --color-popover-foreground: var(--ai-popover-foreground);
+    --color-primary: var(--ai-primary);
+    --color-primary-foreground: var(--ai-primary-foreground);
+    --color-muted: var(--ai-muted);
+    --color-muted-foreground: var(--ai-muted-foreground);
+    --color-border: var(--ai-border);
+    --color-input: var(--ai-input);
+    --color-ring: var(--ai-ring);
+    --radius-sm: var(--ai-radius-small);
+    --radius-md: var(--ai-radius-medium);
+    --radius-lg: var(--ai-radius-large);
+  }
+  @layer base {
+    body { background: var(--ai-background); color: var(--ai-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--ai-background); }
+      .text-background { color: var(--ai-background); }
+      .border-background { border-color: var(--ai-background); }
+      .ring-background { --tw-ring-color: var(--ai-background); }
+      .bg-foreground { background-color: var(--ai-foreground); }
+      .text-foreground { color: var(--ai-foreground); }
+      .border-foreground { border-color: var(--ai-foreground); }
+      .ring-foreground { --tw-ring-color: var(--ai-foreground); }
+      .bg-card { background-color: var(--ai-card); }
+      .text-card { color: var(--ai-card); }
+      .border-card { border-color: var(--ai-card); }
+      .ring-card { --tw-ring-color: var(--ai-card); }
+      .bg-card-foreground { background-color: var(--ai-card-foreground); }
+      .text-card-foreground { color: var(--ai-card-foreground); }
+      .border-card-foreground { border-color: var(--ai-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--ai-card-foreground); }
+      .bg-popover { background-color: var(--ai-popover); }
+      .text-popover { color: var(--ai-popover); }
+      .border-popover { border-color: var(--ai-popover); }
+      .ring-popover { --tw-ring-color: var(--ai-popover); }
+      .bg-popover-foreground { background-color: var(--ai-popover-foreground); }
+      .text-popover-foreground { color: var(--ai-popover-foreground); }
+      .border-popover-foreground { border-color: var(--ai-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--ai-popover-foreground); }
+      .bg-primary { background-color: var(--ai-primary); }
+      .text-primary { color: var(--ai-primary); }
+      .border-primary { border-color: var(--ai-primary); }
+      .ring-primary { --tw-ring-color: var(--ai-primary); }
+      .bg-primary-foreground { background-color: var(--ai-primary-foreground); }
+      .text-primary-foreground { color: var(--ai-primary-foreground); }
+      .border-primary-foreground { border-color: var(--ai-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--ai-primary-foreground); }
+      .bg-muted { background-color: var(--ai-muted); }
+      .text-muted { color: var(--ai-muted); }
+      .border-muted { border-color: var(--ai-muted); }
+      .ring-muted { --tw-ring-color: var(--ai-muted); }
+      .bg-muted-foreground { background-color: var(--ai-muted-foreground); }
+      .text-muted-foreground { color: var(--ai-muted-foreground); }
+      .border-muted-foreground { border-color: var(--ai-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--ai-muted-foreground); }
+      .bg-border { background-color: var(--ai-border); }
+      .text-border { color: var(--ai-border); }
+      .border-border { border-color: var(--ai-border); }
+      .ring-border { --tw-ring-color: var(--ai-border); }
+      .bg-input { background-color: var(--ai-input); }
+      .text-input { color: var(--ai-input); }
+      .border-input { border-color: var(--ai-input); }
+      .ring-input { --tw-ring-color: var(--ai-input); }
+      .bg-ring { background-color: var(--ai-ring); }
+      .text-ring { color: var(--ai-ring); }
+      .border-ring { border-color: var(--ai-ring); }
+      .ring-ring { --tw-ring-color: var(--ai-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body>
+  <!-- Shared project shell: fixed sidebar + scrollable main area -->
+  <div class="font-sans min-h-screen flex bg-[var(--ai-background)] text-[var(--ai-foreground)]">
+
+    <!-- Left sidebar -->
+    <aside id="sidebar" class="fixed top-0 left-0 z-20 h-screen w-60 bg-[var(--ai-card)] border-r border-[var(--ai-border)] flex flex-col" style="box-shadow: var(--shadow-sm);">
+      <nav class="flex-1 overflow-y-auto py-5 px-3 space-y-1">
+        <a id="nav-dashboard" href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-[var(--radius-md)] text-sm font-medium bg-[var(--ai-50)] text-[var(--ai-primary)] border-l-4 border-[var(--ai-primary)] hover:bg-[var(--ai-100)] transition-colors">
+          <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+          <span>工作台</span>
+        </a>
+        <a id="nav-my-agents" data-dom-id="nav-my-agents" href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-[var(--radius-md)] text-sm font-medium text-[var(--ai-muted-foreground)] hover:bg-[var(--ai-muted)] hover:text-[var(--ai-foreground)] transition-colors">
+          <i data-lucide="bot" class="w-5 h-5"></i>
+          <span>我的助手</span>
+        </a>
+        <a id="nav-knowledge" data-dom-id="nav-knowledge" href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-[var(--radius-md)] text-sm font-medium text-[var(--ai-muted-foreground)] hover:bg-[var(--ai-muted)] hover:text-[var(--ai-foreground)] transition-colors">
+          <i data-lucide="book-open" class="w-5 h-5"></i>
+          <span>知识库</span>
+        </a>
+        <a id="nav-marketplace" href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-[var(--radius-md)] text-sm font-medium text-[var(--ai-muted-foreground)] hover:bg-[var(--ai-muted)] hover:text-[var(--ai-foreground)] transition-colors">
+          <i data-lucide="store" class="w-5 h-5"></i>
+          <span>助手市场</span>
+        </a>
+        <a id="nav-analytics" href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-[var(--radius-md)] text-sm font-medium text-[var(--ai-muted-foreground)] hover:bg-[var(--ai-muted)] hover:text-[var(--ai-foreground)] transition-colors">
+          <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
+          <span>数据分析</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main wrapper -->
+    <div class="flex-1 flex flex-col ml-60">
+
+      <!-- Top header -->
+      <header id="top-header" class="fixed top-0 right-0 left-60 z-10 h-16 bg-[var(--ai-card)] border-b border-[var(--ai-border)] flex items-center justify-between px-6" style="box-shadow: var(--shadow-sm);">
+        <!-- Logo -->
+        <div class="flex items-center gap-2 w-60 shrink-0">
+          <div class="w-8 h-8 rounded-[var(--radius-md)] bg-[var(--ai-primary)] flex items-center justify-center text-[var(--ai-primary-foreground)]">
+            <i data-lucide="sparkles" class="w-5 h-5"></i>
+          </div>
+          <span class="text-lg font-bold text-[var(--ai-foreground)] tracking-tight">AI Skills</span>
+        </div>
+
+        <!-- Search -->
+        <div class="flex-1 max-w-2xl px-6">
+          <div class="relative">
+            <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--ai-muted-foreground)]"></i>
+            <input type="text" placeholder="搜索课程、助手或知识点" class="w-full h-10 pl-10 pr-4 bg-[var(--ai-muted)] border border-[var(--ai-border)] rounded-[var(--radius-lg)] text-sm text-[var(--ai-foreground)] placeholder:text-[var(--ai-muted-foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--ai-ring)] focus:border-transparent transition-all" />
+          </div>
+        </div>
+
+        <!-- Right actions -->
+        <div class="flex items-center gap-4 shrink-0">
+          <button type="button" class="relative w-10 h-10 rounded-[var(--radius-md)] hover:bg-[var(--ai-muted)] flex items-center justify-center text-[var(--ai-muted-foreground)] transition-colors" aria-label="通知">
+            <i data-lucide="bell" class="w-5 h-5"></i>
+            <span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-[var(--ai-primary)] border-2 border-[var(--ai-card)]"></span>
+          </button>
+
+          <div class="flex items-center gap-3 pl-4 border-l border-[var(--ai-border)]">
+            <div class="w-9 h-9 rounded-full bg-[var(--ai-primary)] text-[var(--ai-primary-foreground)] flex items-center justify-center text-sm font-semibold">
+              张
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium text-[var(--ai-foreground)]">张教授</span>
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-[var(--ai-muted)] text-[var(--ai-muted-foreground)] border border-[var(--ai-border)]">
+                教师
+              </span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main content area -->
+      <main class="flex-1 pt-16 min-h-screen overflow-y-auto">
+        <div class="max-w-7xl mx-auto px-6 py-6">
+
+          <!-- Page title -->
+          <div class="flex items-center justify-between mb-8">
+            <div>
+              <h1 class="text-h1 text-[var(--ai-foreground)]">教师工作台</h1>
+              <p class="text-body text-[var(--ai-muted-foreground)] mt-1">欢迎使用 AI Skills，管理您的教学助手与课程</p>
+            </div>
+            <button type="button" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-[var(--radius-md)] bg-[var(--ai-primary)] text-[var(--ai-primary-foreground)] text-sm font-medium hover:bg-[var(--ai-700)] transition-colors">
+              <i data-lucide="plus" class="w-4 h-4"></i>
+              <span>新建助手</span>
+            </button>
+          </div>
+
+          <!-- Stats row -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <div class="bg-[var(--ai-card)] border border-[var(--ai-border)] rounded-[var(--radius-lg)] p-5" style="box-shadow: var(--shadow-sm);">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-small text-[var(--ai-muted-foreground)]">我的助手</span>
+                <div class="w-9 h-9 rounded-[var(--radius-md)] bg-[var(--ai-50)] text-[var(--ai-primary)] flex items-center justify-center">
+                  <i data-lucide="bot" class="w-5 h-5"></i>
+                </div>
+              </div>
+              <div class="text-h1 text-[var(--ai-foreground)]">12</div>
+            </div>
+            <div class="bg-[var(--ai-card)] border border-[var(--ai-border)] rounded-[var(--radius-lg)] p-5" style="box-shadow: var(--shadow-sm);">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-small text-[var(--ai-muted-foreground)]">累计课时</span>
+                <div class="w-9 h-9 rounded-[var(--radius-md)] bg-[var(--ai-cyan-50)] text-[var(--ai-cyan-600)] flex items-center justify-center">
+                  <i data-lucide="clock" class="w-5 h-5"></i>
+                </div>
+              </div>
+              <div class="text-h1 text-[var(--ai-foreground)]">128</div>
+            </div>
+            <div class="bg-[var(--ai-card)] border border-[var(--ai-border)] rounded-[var(--radius-lg)] p-5" style="box-shadow: var(--shadow-sm);">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-small text-[var(--ai-muted-foreground)]">覆盖学生</span>
+                <div class="w-9 h-9 rounded-[var(--radius-md)] bg-[var(--ai-50)] text-[var(--ai-primary)] flex items-center justify-center">
+                  <i data-lucide="users" class="w-5 h-5"></i>
+                </div>
+              </div>
+              <div class="text-h1 text-[var(--ai-foreground)]">356</div>
+            </div>
+            <div class="bg-[var(--ai-card)] border border-[var(--ai-border)] rounded-[var(--radius-lg)] p-5" style="box-shadow: var(--shadow-sm);">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-small text-[var(--ai-muted-foreground)]">待处理反馈</span>
+                <div class="w-9 h-9 rounded-[var(--radius-md)] bg-[var(--state-error-bg)] text-[var(--state-error)] flex items-center justify-center">
+                  <i data-lucide="bell-dot" class="w-5 h-5"></i>
+                </div>
+              </div>
+              <div class="text-h1 text-[var(--ai-foreground)]">5</div>
+            </div>
+          </div>
+
+          <!-- Quick actions -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div id="quick-create" data-dom-id="quick-create" class="group bg-[var(--ai-card)] border border-[var(--ai-border)] rounded-[var(--radius-lg)] p-5 hover:border-[var(--ai-primary)] transition-colors" style="box-shadow: var(--shadow-sm);">
+              <div class="flex items-start justify-between mb-3">
+                <div class="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--ai-primary)] text-[var(--ai-primary-foreground)] flex items-center justify-center">
+                  <i data-lucide="plus" class="w-5 h-5"></i>
+                </div>
+                <i data-lucide="chevron-right" class="w-5 h-5 text-[var(--ai-muted-foreground)] group-hover:text-[var(--ai-primary)] transition-colors"></i>
+              </div>
+              <h3 class="text-h3 text-[var(--ai-foreground)] mb-1">创建教学助手</h3>
+              <p class="text-small text-[var(--ai-muted-foreground)]">根据课程目标快速配置专属 AI 教学助手。</p>
+            </div>
+            <div id="quick-knowledge" data-dom-id="quick-knowledge" class="group bg-[var(--ai-card)] border border-[var(--ai-border)] rounded-[var(--radius-lg)] p-5 hover:border-[var(--ai-cyan-600)] transition-colors" style="box-shadow: var(--shadow-sm);">
+              <div class="flex items-start justify-between mb-3">
+                <div class="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--ai-cyan-600)] text-[var(--ai-primary-foreground)] flex items-center justify-center">
+                  <i data-lucide="upload" class="w-5 h-5"></i>
+                </div>
+                <i data-lucide="chevron-right" class="w-5 h-5 text-[var(--ai-muted-foreground)] group-hover:text-[var(--ai-cyan-600)] transition-colors"></i>
+              </div>
+              <h3 class="text-h3 text-[var(--ai-foreground)] mb-1">上传课程资料</h3>
+              <p class="text-small text-[var(--ai-muted-foreground)]">添加课件、题库与参考资料，构建知识库。</p>
+            </div>
+            <div class="group bg-[var(--ai-card)] border border-[var(--ai-border)] rounded-[var(--radius-lg)] p-5 hover:border-[var(--ai-primary)] transition-colors" style="box-shadow: var(--shadow-sm);">
+              <div class="flex items-start justify-between mb-3">
+                <div class="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--ai-50)] text-[var(--ai-primary)] flex items-center justify-center">
+                  <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
+                </div>
+                <i data-lucide="chevron-right" class="w-5 h-5 text-[var(--ai-muted-foreground)] group-hover:text-[var(--ai-primary)] transition-colors"></i>
+              </div>
+              <h3 class="text-h3 text-[var(--ai-foreground)] mb-1">查看学情分析</h3>
+              <p class="text-small text-[var(--ai-muted-foreground)]">跟踪学生学习进度与互动反馈。</p>
+            </div>
+          </div>
+
+          <!-- Recent skills table -->
+          <div class="bg-[var(--ai-card)] border border-[var(--ai-border)] rounded-[var(--radius-lg)] overflow-hidden" style="box-shadow: var(--shadow-sm);">
+            <div class="px-5 py-4 border-b border-[var(--ai-border)] flex items-center justify-between">
+              <h2 class="text-h2 text-[var(--ai-foreground)]">最近更新</h2>
+              <a href="#" class="text-sm font-medium text-[var(--ai-primary)] hover:text-[var(--ai-700)]">查看全部</a>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left">
+                <thead class="bg-[var(--ai-muted)]">
+                  <tr>
+                    <th class="px-5 py-3 text-caption font-medium text-[var(--ai-muted-foreground)]">助手名称</th>
+                    <th class="px-5 py-3 text-caption font-medium text-[var(--ai-muted-foreground)]">类型</th>
+                    <th class="px-5 py-3 text-caption font-medium text-[var(--ai-muted-foreground)]">目标人群</th>
+                    <th class="px-5 py-3 text-caption font-medium text-[var(--ai-muted-foreground)]">状态</th>
+                    <th class="px-5 py-3 text-caption font-medium text-[var(--ai-muted-foreground)]">最近更新</th>
+                    <th class="px-5 py-3 text-caption font-medium text-[var(--ai-muted-foreground)]">操作</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-[var(--ai-border)]">
+                  <tr id="skill-row-1" class="hover:bg-[var(--ai-slate-50)] transition-colors">
+                    <td class="px-5 py-4 text-sm font-medium text-[var(--ai-foreground)]">大学物理答疑助手</td>
+                    <td class="px-5 py-4 text-small text-[var(--ai-muted-foreground)]">问答助手</td>
+                    <td class="px-5 py-4 text-small text-[var(--ai-muted-foreground)]">本科一年级</td>
+                    <td class="px-5 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--state-success-bg)] text-[var(--state-success)]">已发布</span></td>
+                    <td class="px-5 py-4 text-small text-[var(--ai-muted-foreground)]">2026-08-10</td>
+                    <td class="px-5 py-4">
+                      <a href="#" class="text-sm font-medium text-[var(--ai-primary)] hover:text-[var(--ai-700)]">编辑</a>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-[var(--ai-slate-50)] transition-colors">
+                    <td class="px-5 py-4 text-sm font-medium text-[var(--ai-foreground)]">英语口语练习 Bot</td>
+                    <td class="px-5 py-4 text-small text-[var(--ai-muted-foreground)]">对话训练</td>
+                    <td class="px-5 py-4 text-small text-[var(--ai-muted-foreground)]">本科二年级</td>
+                    <td class="px-5 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--state-warning-bg)] text-[var(--state-warning)]">调试中</span></td>
+                    <td class="px-5 py-4 text-small text-[var(--ai-muted-foreground)]">2026-08-09</td>
+                    <td class="px-5 py-4">
+                      <a href="#" class="text-sm font-medium text-[var(--ai-primary)] hover:text-[var(--ai-700)]">编辑</a>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-[var(--ai-slate-50)] transition-colors">
+                    <td class="px-5 py-4 text-sm font-medium text-[var(--ai-foreground)]">高等数学题库助手</td>
+                    <td class="px-5 py-4 text-small text-[var(--ai-muted-foreground)]">题库助手</td>
+                    <td class="px-5 py-4 text-small text-[var(--ai-muted-foreground)]">本科一年级</td>
+                    <td class="px-5 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--ai-muted)] text-[var(--ai-muted-foreground)] border border-[var(--ai-border)]">草稿</span></td>
+                    <td class="px-5 py-4 text-small text-[var(--ai-muted-foreground)]">2026-08-08</td>
+                    <td class="px-5 py-4">
+                      <a href="#" class="text-sm font-medium text-[var(--ai-primary)] hover:text-[var(--ai-700)]">编辑</a>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-[var(--ai-slate-50)] transition-colors">
+                    <td class="px-5 py-4 text-sm font-medium text-[var(--ai-foreground)]">Python 编程辅导</td>
+                    <td class="px-5 py-4 text-small text-[var(--ai-muted-foreground)]">代码辅导</td>
+                    <td class="px-5 py-4 text-small text-[var(--ai-muted-foreground)]">本科三年级</td>
+                    <td class="px-5 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--state-success-bg)] text-[var(--state-success)]">已发布</span></td>
+                    <td class="px-5 py-4 text-small text-[var(--ai-muted-foreground)]">2026-08-07</td>
+                    <td class="px-5 py-4">
+                      <a href="#" class="text-sm font-medium text-[var(--ai-primary)] hover:text-[var(--ai-700)]">编辑</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

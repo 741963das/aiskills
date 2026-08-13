@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创建助手·教学信息采集</title>
+    <style id="theme-vars">
+/* AI Skills Education Platform — Brand Tokens */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Brand primary — Indigo */
+  --ai-50: #EEF2FF;
+  --ai-100: #E0E7FF;
+  --ai-200: #C7D2FE;
+  --ai-300: #A5B4FC;
+  --ai-400: #818CF8;
+  --ai-500: #6366F1;
+  --ai-600: #4F46E5;
+  --ai-700: #4338CA;
+  --ai-800: #3730A3;
+  --ai-900: #312E81;
+
+  /* Brand accent — Cyan */
+  --ai-cyan-50: #ECFEFF;
+  --ai-cyan-100: #CFFAFE;
+  --ai-cyan-200: #A5F3FC;
+  --ai-cyan-300: #67E8F9;
+  --ai-cyan-400: #22D3EE;
+  --ai-cyan-500: #06B6D4;
+  --ai-cyan-600: #0891B2;
+  --ai-cyan-700: #0E7490;
+
+  /* Neutral */
+  --ai-slate-50: #F8FAFC;
+  --ai-slate-100: #F1F5F9;
+  --ai-slate-200: #E2E8F0;
+  --ai-slate-300: #CBD5E1;
+  --ai-slate-400: #94A3B8;
+  --ai-slate-500: #64748B;
+  --ai-slate-600: #475569;
+  --ai-slate-700: #334155;
+  --ai-slate-800: #1E293B;
+  --ai-slate-900: #0F172A;
+
+  /* Semantic aliases */
+  --ai-background: var(--ai-slate-50);
+  --ai-foreground: var(--ai-slate-900);
+  --ai-card: #FFFFFF;
+  --ai-card-foreground: var(--ai-slate-900);
+  --ai-popover: #FFFFFF;
+  --ai-popover-foreground: var(--ai-slate-900);
+  --ai-primary: var(--ai-600);
+  --ai-primary-foreground: #FFFFFF;
+  --ai-muted: var(--ai-slate-100);
+  --ai-muted-foreground: var(--ai-slate-500);
+  --ai-border: var(--ai-slate-200);
+  --ai-input: var(--ai-slate-200);
+  --ai-ring: var(--ai-500);
+
+  /* Radius aliases */
+  --ai-radius-small: var(--radius-sm);
+  --ai-radius-medium: var(--radius-md);
+  --ai-radius-large: var(--radius-lg);
+
+  /* State colors */
+  --state-success: #059669;
+  --state-success-bg: #ECFDF5;
+  --state-warning: #D97706;
+  --state-warning-bg: #FFFBEB;
+  --state-error: #DC2626;
+  --state-error-bg: #FEF2F2;
+  --state-info: var(--ai-cyan-600);
+  --state-info-bg: var(--ai-cyan-50);
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-full: 9999px;
+
+  /* Typography */
+  --font-sans: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', monospace;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.06), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+}
+
+/* Typography classes */
+.font-sans { font-family: var(--font-sans); }
+.font-mono { font-family: var(--font-mono); }
+
+.text-display { font-size: 28px; line-height: 1.25; font-weight: 700; letter-spacing: -0.02em; }
+.text-h1 { font-size: 24px; line-height: 1.3; font-weight: 700; letter-spacing: -0.01em; }
+.text-h2 { font-size: 20px; line-height: 1.35; font-weight: 600; }
+.text-h3 { font-size: 16px; line-height: 1.4; font-weight: 600; }
+.text-body { font-size: 14px; line-height: 1.6; font-weight: 400; }
+.text-small { font-size: 13px; line-height: 1.5; font-weight: 400; }
+.text-caption { font-size: 12px; line-height: 1.4; font-weight: 500; }
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--ai-background);
+    --color-foreground: var(--ai-foreground);
+    --color-card: var(--ai-card);
+    --color-card-foreground: var(--ai-card-foreground);
+    --color-popover: var(--ai-popover);
+    --color-popover-foreground: var(--ai-popover-foreground);
+    --color-primary: var(--ai-primary);
+    --color-primary-foreground: var(--ai-primary-foreground);
+    --color-muted: var(--ai-muted);
+    --color-muted-foreground: var(--ai-muted-foreground);
+    --color-border: var(--ai-border);
+    --color-input: var(--ai-input);
+    --color-ring: var(--ai-ring);
+    --radius-sm: var(--ai-radius-small);
+    --radius-md: var(--ai-radius-medium);
+    --radius-lg: var(--ai-radius-large);
+  }
+  @layer base {
+    body { background: var(--ai-background); color: var(--ai-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--ai-background); }
+      .text-background { color: var(--ai-background); }
+      .border-background { border-color: var(--ai-background); }
+      .ring-background { --tw-ring-color: var(--ai-background); }
+      .bg-foreground { background-color: var(--ai-foreground); }
+      .text-foreground { color: var(--ai-foreground); }
+      .border-foreground { border-color: var(--ai-foreground); }
+      .ring-foreground { --tw-ring-color: var(--ai-foreground); }
+      .bg-card { background-color: var(--ai-card); }
+      .text-card { color: var(--ai-card); }
+      .border-card { border-color: var(--ai-card); }
+      .ring-card { --tw-ring-color: var(--ai-card); }
+      .bg-card-foreground { background-color: var(--ai-card-foreground); }
+      .text-card-foreground { color: var(--ai-card-foreground); }
+      .border-card-foreground { border-color: var(--ai-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--ai-card-foreground); }
+      .bg-popover { background-color: var(--ai-popover); }
+      .text-popover { color: var(--ai-popover); }
+      .border-popover { border-color: var(--ai-popover); }
+      .ring-popover { --tw-ring-color: var(--ai-popover); }
+      .bg-popover-foreground { background-color: var(--ai-popover-foreground); }
+      .text-popover-foreground { color: var(--ai-popover-foreground); }
+      .border-popover-foreground { border-color: var(--ai-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--ai-popover-foreground); }
+      .bg-primary { background-color: var(--ai-primary); }
+      .text-primary { color: var(--ai-primary); }
+      .border-primary { border-color: var(--ai-primary); }
+      .ring-primary { --tw-ring-color: var(--ai-primary); }
+      .bg-primary-foreground { background-color: var(--ai-primary-foreground); }
+      .text-primary-foreground { color: var(--ai-primary-foreground); }
+      .border-primary-foreground { border-color: var(--ai-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--ai-primary-foreground); }
+      .bg-muted { background-color: var(--ai-muted); }
+      .text-muted { color: var(--ai-muted); }
+      .border-muted { border-color: var(--ai-muted); }
+      .ring-muted { --tw-ring-color: var(--ai-muted); }
+      .bg-muted-foreground { background-color: var(--ai-muted-foreground); }
+      .text-muted-foreground { color: var(--ai-muted-foreground); }
+      .border-muted-foreground { border-color: var(--ai-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--ai-muted-foreground); }
+      .bg-border { background-color: var(--ai-border); }
+      .text-border { color: var(--ai-border); }
+      .border-border { border-color: var(--ai-border); }
+      .ring-border { --tw-ring-color: var(--ai-border); }
+      .bg-input { background-color: var(--ai-input); }
+      .text-input { color: var(--ai-input); }
+      .border-input { border-color: var(--ai-input); }
+      .ring-input { --tw-ring-color: var(--ai-input); }
+      .bg-ring { background-color: var(--ai-ring); }
+      .text-ring { color: var(--ai-ring); }
+      .border-ring { border-color: var(--ai-ring); }
+      .ring-ring { --tw-ring-color: var(--ai-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="font-sans antialiased">
+  <div class="min-h-screen flex bg-[var(--ai-background)] text-[var(--ai-foreground)]">
+
+    <!-- Left sidebar -->
+    <aside id="sidebar" class="fixed top-0 left-0 z-20 h-screen w-60 bg-[var(--ai-card)] border-r border-[var(--ai-border)] flex flex-col" style="box-shadow: var(--shadow-sm);">
+      <nav class="flex-1 overflow-y-auto py-5 px-3 space-y-1">
+        <a id="nav-dashboard" href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-[var(--radius-md)] text-sm font-medium bg-[var(--ai-muted)] text-[var(--ai-foreground)] transition-colors">
+          <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+          <span>工作台</span>
+        </a>
+        <a id="nav-my-agents" href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-[var(--radius-md)] text-sm font-medium text-[var(--ai-muted-foreground)] hover:bg-[var(--ai-muted)] hover:text-[var(--ai-foreground)] transition-colors">
+          <i data-lucide="bot" class="w-5 h-5"></i>
+          <span>我的助手</span>
+        </a>
+        <a id="nav-knowledge" href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-[var(--radius-md)] text-sm font-medium text-[var(--ai-muted-foreground)] hover:bg-[var(--ai-muted)] hover:text-[var(--ai-foreground)] transition-colors">
+          <i data-lucide="book-open" class="w-5 h-5"></i>
+          <span>知识库</span>
+        </a>
+        <a id="nav-marketplace" href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-[var(--radius-md)] text-sm font-medium text-[var(--ai-muted-foreground)] hover:bg-[var(--ai-muted)] hover:text-[var(--ai-foreground)] transition-colors">
+          <i data-lucide="store" class="w-5 h-5"></i>
+          <span>助手市场</span>
+        </a>
+        <a id="nav-analytics" href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-[var(--radius-md)] text-sm font-medium text-[var(--ai-muted-foreground)] hover:bg-[var(--ai-muted)] hover:text-[var(--ai-foreground)] transition-colors">
+          <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
+          <span>数据分析</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main wrapper -->
+    <div class="flex-1 flex flex-col ml-60">
+
+      <!-- Top header -->
+      <header id="top-header" class="fixed top-0 right-0 left-60 z-10 h-16 bg-[var(--ai-card)] border-b border-[var(--ai-border)] flex items-center justify-between px-6" style="box-shadow: var(--shadow-sm);">
+        <!-- Logo -->
+        <div class="flex items-center gap-2 w-60 shrink-0">
+          <div class="w-8 h-8 rounded-[var(--radius-md)] bg-[var(--ai-primary)] flex items-center justify-center text-[var(--ai-primary-foreground)]">
+            <i data-lucide="sparkles" class="w-5 h-5"></i>
+          </div>
+          <span class="text-lg font-bold text-[var(--ai-foreground)] tracking-tight">AI Skills</span>
+        </div>
+
+        <!-- Search -->
+        <div class="flex-1 max-w-2xl px-6">
+          <div class="relative">
+            <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--ai-muted-foreground)]"></i>
+            <input type="text" placeholder="搜索课程、助手或知识点" class="w-full h-10 pl-10 pr-4 bg-[var(--ai-muted)] border border-[var(--ai-border)] rounded-[var(--radius-lg)] text-sm text-[var(--ai-foreground)] placeholder:text-[var(--ai-muted-foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--ai-ring)] focus:border-transparent transition-all" />
+          </div>
+        </div>
+
+        <!-- Right actions -->
+        <div class="flex items-center gap-4 shrink-0">
+          <button type="button" class="relative w-10 h-10 rounded-[var(--radius-md)] hover:bg-[var(--ai-muted)] flex items-center justify-center text-[var(--ai-muted-foreground)] transition-colors" aria-label="通知">
+            <i data-lucide="bell" class="w-5 h-5"></i>
+            <span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-[var(--ai-primary)] border-2 border-[var(--ai-card)]"></span>
+          </button>
+
+          <div class="flex items-center gap-3 pl-4 border-l border-[var(--ai-border)]">
+            <div class="w-9 h-9 rounded-full bg-[var(--ai-primary)] text-[var(--ai-primary-foreground)] flex items-center justify-center text-sm font-semibold">
+              张
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium text-[var(--ai-foreground)]">张教授</span>
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-[var(--ai-muted)] text-[var(--ai-muted-foreground)] border border-[var(--ai-border)]">
+                教师
+              </span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main content area -->
+      <main class="flex-1 pt-16 min-h-screen overflow-y-auto">
+        <div class="max-w-4xl mx-auto px-6 py-6 pb-28">
+
+          <!-- Page title -->
+          <div class="mb-6">
+            <h1 class="text-h1 text-[var(--ai-foreground)]">创建教学助手</h1>
+            <p class="text-body text-[var(--ai-muted-foreground)] mt-1">步骤 2/4：完善教学信息，让助手更懂你的课堂</p>
+          </div>
+
+          <!-- Stepper -->
+          <div class="mb-8">
+            <ol class="flex items-center justify-between">
+              <li class="flex-1 flex items-center">
+                <div class="flex flex-col items-center">
+                  <div class="w-8 h-8 rounded-full bg-[var(--ai-primary)] text-[var(--ai-primary-foreground)] flex items-center justify-center text-sm font-semibold">
+                    <i data-lucide="check" class="w-4 h-4"></i>
+                  </div>
+                  <span class="mt-2 text-caption text-[var(--ai-primary)] font-medium">基础信息</span>
+                </div>
+                <div class="flex-1 h-0.5 bg-[var(--ai-primary)] mx-3"></div>
+              </li>
+              <li id="step-2" class="flex-1 flex items-center">
+                <div class="flex flex-col items-center">
+                  <div class="w-8 h-8 rounded-full bg-white border-2 border-[var(--ai-primary)] text-[var(--ai-primary)] flex items-center justify-center text-sm font-bold ring-2 ring-[var(--ai-primary)]/20">
+                    2
+                  </div>
+                  <span class="mt-2 text-caption text-[var(--ai-primary)] font-semibold">教学信息</span>
+                </div>
+                <div class="flex-1 h-0.5 bg-[var(--ai-border)] mx-3"></div>
+              </li>
+              <li class="flex-1 flex items-center">
+                <div class="flex flex-col items-center">
+                  <div class="w-8 h-8 rounded-full bg-[var(--ai-muted)] text-[var(--ai-muted-foreground)] flex items-center justify-center text-sm font-medium">
+                    3
+                  </div>
+                  <span class="mt-2 text-caption text-[var(--ai-muted-foreground)]">知识关联</span>
+                </div>
+                <div class="flex-1 h-0.5 bg-[var(--ai-border)] mx-3"></div>
+              </li>
+              <li class="flex flex-col items-center">
+                <div class="w-8 h-8 rounded-full bg-[var(--ai-muted)] text-[var(--ai-muted-foreground)] flex items-center justify-center text-sm font-medium">
+                  4
+                </div>
+                <span class="mt-2 text-caption text-[var(--ai-muted-foreground)]">预览发布</span>
+              </li>
+            </ol>
+          </div>
+
+          <!-- Tab bar -->
+          <div class="mb-6 border-b border-[var(--ai-border)]">
+            <nav class="flex items-center gap-1 overflow-x-auto" aria-label="教学信息分类">
+              <button id="tab-basic" type="button" class="px-4 py-2.5 text-sm font-semibold text-[var(--ai-primary)] border-b-2 border-[var(--ai-primary)] bg-[var(--ai-primary)]/5 rounded-t-[var(--radius-md)] transition-colors">
+                基本信息
+              </button>
+              <button id="tab-teacher" type="button" class="px-4 py-2.5 text-sm font-medium text-[var(--ai-muted-foreground)] border-b-2 border-transparent hover:text-[var(--ai-foreground)] hover:bg-[var(--ai-muted)] rounded-t-[var(--radius-md)] transition-colors">
+                教师风格
+              </button>
+              <button id="tab-content" type="button" class="px-4 py-2.5 text-sm font-medium text-[var(--ai-muted-foreground)] border-b-2 border-transparent hover:text-[var(--ai-foreground)] hover:bg-[var(--ai-muted)] rounded-t-[var(--radius-md)] transition-colors">
+                教学内容
+              </button>
+              <button id="tab-method" type="button" class="px-4 py-2.5 text-sm font-medium text-[var(--ai-muted-foreground)] border-b-2 border-transparent hover:text-[var(--ai-foreground)] hover:bg-[var(--ai-muted)] rounded-t-[var(--radius-md)] transition-colors">
+                教学方法
+              </button>
+              <button id="tab-evaluation" type="button" class="px-4 py-2.5 text-sm font-medium text-[var(--ai-muted-foreground)] border-b-2 border-transparent hover:text-[var(--ai-foreground)] hover:bg-[var(--ai-muted)] rounded-t-[var(--radius-md)] transition-colors">
+                评价方式
+              </button>
+              <button id="tab-resources" type="button" class="px-4 py-2.5 text-sm font-medium text-[var(--ai-muted-foreground)] border-b-2 border-transparent hover:text-[var(--ai-foreground)] hover:bg-[var(--ai-muted)] rounded-t-[var(--radius-md)] transition-colors">
+                学习资源
+              </button>
+            </nav>
+          </div>
+
+          <!-- Form content (基本信息) -->
+          <div class="bg-[var(--ai-card)] border border-[var(--ai-border)] rounded-[var(--radius-lg)] p-6" style="box-shadow: var(--shadow-sm);">
+            <div class="space-y-6">
+
+              <!-- 助手名称 -->
+              <div>
+                <label for="assistant-name" class="block text-sm font-semibold text-[var(--ai-foreground)] mb-1.5">助手名称</label>
+                <input id="assistant-name" type="text" value="高中物理力学助手" class="w-full h-10 px-4 bg-[var(--ai-card)] border border-[var(--ai-border)] rounded-[var(--radius-md)] text-sm text-[var(--ai-foreground)] placeholder:text-[var(--ai-muted-foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--ai-ring)] focus:border-transparent transition-all" />
+              </div>
+
+              <!-- 学科/年级 -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="subject" class="block text-sm font-semibold text-[var(--ai-foreground)] mb-1.5">学科</label>
+                  <select id="subject" class="w-full h-10 px-3 bg-[var(--ai-card)] border border-[var(--ai-border)] rounded-[var(--radius-md)] text-sm text-[var(--ai-foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--ai-ring)] focus:border-transparent transition-all">
+                    <option selected>物理</option>
+                    <option>数学</option>
+                    <option>化学</option>
+                    <option>生物</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="grade" class="block text-sm font-semibold text-[var(--ai-foreground)] mb-1.5">年级</label>
+                  <select id="grade" class="w-full h-10 px-3 bg-[var(--ai-card)] border border-[var(--ai-border)] rounded-[var(--radius-md)] text-sm text-[var(--ai-foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--ai-ring)] focus:border-transparent transition-all">
+                    <option selected>高中一年级</option>
+                    <option>高中二年级</option>
+                    <option>高中三年级</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- 教学目标 -->
+              <div>
+                <label for="teaching-goal" class="block text-sm font-semibold text-[var(--ai-foreground)] mb-1.5">教学目标</label>
+                <textarea id="teaching-goal" rows="4" placeholder="例如：帮助学生掌握牛顿运动定律的基本概念，能够运用 F=ma 分析常见直线运动与斜面问题，并建立受力分析的基本框架。" class="w-full px-4 py-3 bg-[var(--ai-card)] border border-[var(--ai-border)] rounded-[var(--radius-md)] text-sm text-[var(--ai-foreground)] placeholder:text-[var(--ai-muted-foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--ai-ring)] focus:border-transparent transition-all resize-none"></textarea>
+                <p class="mt-1.5 text-caption text-[var(--ai-muted-foreground)]">简要描述本助手希望帮助学生达成的核心学习目标。</p>
+              </div>
+
+              <!-- 目标学生 -->
+              <div>
+                <label for="target-students" class="block text-sm font-semibold text-[var(--ai-foreground)] mb-1.5">目标学生</label>
+                <input id="target-students" type="text" placeholder="输入学生群体特征，或点击下方标签快速选择" class="w-full h-10 px-4 bg-[var(--ai-card)] border border-[var(--ai-border)] rounded-[var(--radius-md)] text-sm text-[var(--ai-foreground)] placeholder:text-[var(--ai-muted-foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--ai-ring)] focus:border-transparent transition-all" />
+                <div class="flex flex-wrap gap-2 mt-2.5">
+                  <button type="button" class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-[var(--ai-cyan-50)] text-[var(--ai-cyan-600)] border border-[var(--ai-cyan-100)] hover:bg-[var(--ai-cyan-100)] transition-colors">基础薄弱学生</button>
+                  <button type="button" class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-[var(--ai-primary)]/10 text-[var(--ai-primary)] border border-[var(--ai-primary)]/20 hover:bg-[var(--ai-primary)]/20 transition-colors">中等水平</button>
+                  <button type="button" class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-[var(--ai-muted)] text-[var(--ai-muted-foreground)] border border-[var(--ai-border)] hover:bg-[var(--ai-slate-200)] transition-colors">竞赛培优</button>
+                </div>
+              </div>
+
+              <!-- 预计课时 -->
+              <div>
+                <label for="class-hours" class="block text-sm font-semibold text-[var(--ai-foreground)] mb-1.5">预计课时</label>
+                <div class="flex items-center gap-3">
+                  <input id="class-hours" type="number" min="1" value="8" class="w-28 h-10 px-4 bg-[var(--ai-card)] border border-[var(--ai-border)] rounded-[var(--radius-md)] text-sm text-[var(--ai-foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--ai-ring)] focus:border-transparent transition-all" />
+                  <span class="text-sm text-[var(--ai-muted-foreground)]">课时</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Sticky bottom action bar -->
+          <div class="sticky bottom-0 left-0 right-0 mt-8 py-4 bg-[var(--ai-background)]/90 backdrop-blur-sm border-t border-[var(--ai-border)] flex items-center justify-between gap-3">
+            <button id="prev-step" data-dom-id="prev-step" type="button" class="px-5 py-2.5 rounded-[var(--radius-md)] border border-[var(--ai-border)] bg-[var(--ai-card)] text-sm font-medium text-[var(--ai-foreground)] hover:bg-[var(--ai-muted)] transition-colors">
+              上一步
+            </button>
+            <div class="flex items-center gap-3">
+              <button type="button" class="px-5 py-2.5 rounded-[var(--radius-md)] text-sm font-medium text-[var(--ai-muted-foreground)] hover:bg-[var(--ai-muted)] hover:text-[var(--ai-foreground)] transition-colors">
+                保存草稿
+              </button>
+              <button id="next-step" data-dom-id="next-step" type="button" class="px-5 py-2.5 rounded-[var(--radius-md)] bg-[var(--ai-primary)] text-[var(--ai-primary-foreground)] text-sm font-semibold hover:bg-[var(--ai-700)] transition-colors">
+                下一步
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>
